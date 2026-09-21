@@ -1,0 +1,26 @@
+---
+interface Props {
+  beforeTitle?: string;
+  afterTitle?: string;
+}
+
+const {
+  beforeTitle = 'Trước khi tối ưu',
+  afterTitle = 'Sau khi áp dụng HyperLis'
+} = Astro.props;
+---
+
+<div class="hl-before-after">
+  <div class="hl-before-card">
+    <div class="badge">{beforeTitle}</div>
+    <div class="content">
+      <slot name="before" />
+    </div>
+  </div>
+  <div class="hl-after-card">
+    <div class="badge">{afterTitle}</div>
+    <div class="content">
+      <slot name="after" />
+    </div>
+  </div>
+</div>

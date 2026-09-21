@@ -1,0 +1,103 @@
+---
+title: Đổi phiên bản Windows
+description: Chuyển đổi trực tiếp phiên bản hệ điều hành Windows (Edition/SKU) an toàn, không mất dữ liệu.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/convert-skus/convert-skus-01.png" 
+  alt="Giao diện tab Đổi phiên bản (Convert SKUs)"
+/>
+
+## 2. Thông tin Windows hiện tại
+
+### Nhận diện tổng quan và trạng thái bản quyền
+* **Tên hệ điều hành:** Nhận diện và hiển thị trực quan logo cùng tên phiên bản Windows đang chạy (Ví dụ: Windows 11 Pro, Windows 10 Home).
+* **Thẻ trạng thái kích hoạt:**
+  * **Đã kích hoạt:** Hệ điều hành có giấy phép hợp lệ.
+  * **OEM Gốc:** Bản quyền đang dùng trùng khớp chính xác với khóa gốc của nhà sản xuất trong BIOS.
+  * **Chưa kích hoạt:** Hệ điều hành chưa có bản quyền hợp lệ hoặc đã hết hạn.
+  * **Cảnh báo bản quyền bên thứ ba:** Tên phương thức nếu phát hiện hệ thống kích hoạt qua các công cụ không chính thống.
+* **Thẻ kênh phân phối:** Kênh cấp phép của hệ thống (Bán lẻ Retail, Giấy phép nhà sản xuất OEM, Doanh nghiệp Volume).
+
+### Bảng thông số hệ điều hành chi tiết
+* **Phiên bản:** Mã hiệu phiên bản Windows đang chạy (Ví dụ: 23H2, 24H2).
+* **Bản dựng:** Số bản dựng hệ điều hành chi tiết (Ví dụ: 26100.2605).
+* **Kiến trúc:** Nền tảng vi xử lý của hệ thống (64-bit hoặc 32-bit).
+* **ID Sản phẩm:** Mã định danh duy nhất của sản phẩm Windows được cấp phép.
+* **Ngày cài đặt:** Thời điểm hoàn tất cài đặt Windows vào ổ đĩa.
+* **Khởi động cuối:** Thời gian gần nhất máy tính được bật hoặc khởi động lại.
+* **Bản quyền:** Tình trạng giấy phép sử dụng của Windows trên thiết bị.
+* **Phiên bản OEM:** Tên phiên bản Windows được chứng nhận theo khóa bản quyền gốc đính kèm trong phần cứng BIOS/UEFI.
+
+## 3. Chọn phiên bản mục tiêu
+
+### Lựa chọn phiên bản Windows
+Tùy thuộc vào nền tảng hệ điều hành đang chạy, hệ thống sẽ mở các tùy chọn phiên bản Windows tương ứng:
+* **Windows 10:** Hỗ trợ chuyển đổi giữa các bản thông dụng (Home, Pro, Enterprise, Education, v.v.).
+* **Windows 10 LTS:** Chuyên dụng cho các phiên bản hỗ trợ dài hạn (LTSB 2015, LTSB 2016, LTSC 2019, LTSC 2021).
+* **Windows 11:** Hỗ trợ các bản Windows 11 hiện đại (Home, Pro, Pro for Workstations, Enterprise, IoT Enterprise, v.v.).
+* **Windows 11 LTSC:** Hỗ trợ phiên bản hỗ trợ dài hạn doanh nghiệp (Enterprise LTSC, IoT Enterprise LTSC).
+
+### Lựa chọn phiên bản chuyển đổi
+Người dùng nhấp chọn phiên bản mong muốn chuyển sang, được phân nhóm khoa học:
+* **Nhóm Home:** Home, Home Single Language.
+* **Nhóm Pro:** Pro, Pro for Workstations, Pro Education, Pro Single Language.
+* **Nhóm Education:** Education.
+* **Nhóm Enterprise:** Enterprise, IoT Enterprise.
+* **Nhóm LTSB / LTSC:** LTSB 2015, LTSB 2016, LTSC 2019, LTSC 2021, Enterprise LTSC.
+
+### Lưu ý về khóa bản quyền sau chuyển đổi
+* Việc chuyển đổi phiên bản sẽ thay đổi tính năng và mã định danh của hệ điều hành.
+* Một số phiên bản nâng cao (như Enterprise hoặc Workstations) có thể yêu cầu bạn phải nạp mã khóa sản phẩm hợp lệ hoặc bản quyền số tương ứng để tiếp tục kích hoạt sau khi chuyển đổi thành công.
+
+## 4. Xem trước chuyển đổi và kiểm tra tương thích
+
+Cung cấp bản xem trước trực quan về sự thay đổi của hệ thống và bảng chẩn đoán có đủ điều kiện để thực hiện hay không.
+### Kiểm tra điều kiện phần cứng và dịch vụ hệ thống
+* Trạng thái tương thích tổng thể: Hiển thị thông báo thiết bị đủ điều kiện hoặc cần lưu ý.
+* Nhấn nút **Chi tiết** để mở bảng thông tin chẩn đoán chuyên sâu, bao gồm:
+  * **Thông tin hệ thống:** Tên hệ điều hành và kiến trúc CPU.
+  * **Quyền Quản trị viên:** Xác nhận ứng dụng đang chạy dưới quyền cao nhất để có thể thao tác với tệp hệ thống.
+  * **Tính sẵn sàng của gói dữ liệu:** Kiểm tra xem các gói tệp SKU tương ứng trong thư mục công cụ đã sẵn sàng hay chưa.
+  * **Dịch vụ cấp phép bản quyền:** Kiểm tra dịch vụ nền tảng bảo vệ phần mềm (`sppsvc`) có đang hoạt động ổn định hay không.
+  * **Cảnh báo bản quyền:** Nhắc nhở người dùng chuẩn bị phương án kích hoạt lại sau khi hoàn tất khởi động lại máy.
+  * Nút: **Đóng** để quay lại màn hình chính.
+
+### Mức độ rủi ro và khuyến nghị an toàn
+* Quá trình chuyển đổi chỉ can thiệp vào các gói cấp phép và tính năng của hệ điều hành, không format ổ đĩa và không làm mất tài liệu cá nhân.
+* Tuy nhiên, người dùng vẫn nên đóng tất cả các tác vụ đang làm việc dang dở trước khi thực hiện để chuẩn bị cho bước khởi động lại.
+
+### Khung nhật ký lệnh thời gian thực
+* Hộp nhật ký hiển thị chi tiết mọi diễn biến thực thi: nạp khóa, gán quyền thư mục, sao chép tệp chứng chỉ và gọi lệnh cấp phép.
+* Nút: **Xóa log**: Làm sạch nội dung khung nhật ký để dễ dàng theo dõi đợt chuyển đổi mới.
+
+### Khởi chạy chuyển đổi và xác nhận an toàn
+* Nút: **Tìm hiểu thêm về SKUs**: Mở tài liệu kỹ thuật chính thức từ trang web Microsoft về cơ chế nâng cấp các phiên bản Windows.
+* Nút: **Bắt đầu chuyển đổi**: Kiểm tra tính hợp lệ của Edition mục tiêu đã chọn, mở hộp thoại xác nhận chuyển đổi với đầy đủ thông tin: chuyển từ bản nào sang bản nào kèm lời nhắc khởi động lại máy.
+  * Trong hộp thoại xác nhận:
+    * Nút: **Hủy bỏ** để dừng tác vụ.
+    * Nút: **Đồng ý** để bắt đầu quy trình chuyển đổi ngầm.
+
+### Khởi động lại hệ thống để hoàn tất áp dụng
+* Sau khi tiến trình xử lý đạt 100%, hộp thoại hoàn tất thành công sẽ xuất hiện hiển thị tên phiên bản mới cùng thời gian thực hiện.
+* Nút: **Khởi động lại ngay** (hoặc nút **Khởi động lại** màu xanh lá):
+  * Mở hộp thoại xác nhận khởi động lại máy.
+  * Khi người dùng đồng ý, lệnh khởi động lại của Windows sẽ được kích hoạt với thời gian chờ an toàn 5 giây để hệ điều hành cấu hình lại các tính năng mới của Edition đích.
+
+## 5. Quy trình nâng cấp 2 bước đối với bản Home lên LTSC
+
+### Giới hạn kỹ thuật của hệ điều hành
+* Theo thiết kế kiến trúc của Microsoft, hệ điều hành thuộc nhánh Home (hoặc Core) không thể chuyển đổi trực tiếp một lần sang các bản Doanh nghiệp hỗ trợ dài hạn (nhánh LTSC/LTSB).
+
+### Quy trình thực hiện qua bước đệm bản Pro
+Khi phát hiện người dùng đang dùng bản Home và chọn đích là bản LTSC, phần mềm sẽ tự động hiển thị thông báo **Nâng cấp cần qua 2 bước**:
+* **Bước 1:** Nâng cấp hệ thống từ bản Home lên bản Pro và khởi động lại máy tính.
+* **Bước 2:** Sau khi máy tính khởi động lại vào bản Pro, người dùng mở lại phần mềm và tiếp tục chuyển đổi từ Pro sang LTSC thành công.
+* Các nút điều hướng trong hộp thoại:
+  * Nút: **Hủy bỏ** để giữ nguyên hệ thống.
+  * Nút: **Bắt đầu Bước 1** để hệ thống tự động thiết lập đích chuyển đổi thành bản Pro và tiến hành ngay.

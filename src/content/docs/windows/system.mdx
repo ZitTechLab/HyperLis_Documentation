@@ -1,0 +1,93 @@
+---
+title: Hệ thống (Windows)
+description: Tinh chỉnh hệ thống Windows, tắt My People, bật đường dẫn dài Long Paths, tắt dịch vụ cảm biến, VBS và bỏ qua TPM 2.0.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Tắt My People
+
+Tắt tính năng 'My People' (Mọi người) trên thanh taskbar Windows:
+* Xóa biểu tượng People khỏi taskbar
+* Dừng các dịch vụ liên quan
+* Giải phóng không gian taskbar và tài nguyên hệ thống
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People`
+  * `PeopleBand` = `0` (REG_DWORD)
+
+## 3. Bật đường dẫn dài (Long Paths)
+
+Bật hỗ trợ đường dẫn file dài hơn 260 ký tự:
+* Cần thiết cho một số công cụ phát triển (Node.js, Git, Python)
+* Ngăn lỗi 'đường dẫn quá dài' trong cấu trúc thư mục sâu
+* Rất được khuyến nghị cho lập trình viên
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`
+  * `LongPathsEnabled` = `1` (REG_DWORD)
+
+## 4. Tắt dịch vụ cảm biến
+
+Vô hiệu hóa các dịch vụ cảm biến của Windows:
+* Dừng các dịch vụ cho định vị, ánh sáng môi trường và cảm biến chuyển động
+* Hữu ích trên máy tính bàn không có cảm biến
+* Giảm các dịch vụ nền không cần thiết
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SensrSvc`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SensorService`
+  * `Start` = `4` (REG_DWORD)
+
+## 5. Tắt bảo mật dựa trên ảo hóa (VBS)
+
+Vô hiệu hóa Virtualization Based Security (VBS) trên Windows 11:
+* VBS có thể làm giảm hiệu suất gaming từ 5-15%
+* Tắt có thể cải thiện FPS trong game
+
+### Lưu ý
+Giảm một số bảo vệ bảo mật như HVCI (Tính toàn vẹn bộ nhớ). Cần khởi động lại để có hiệu lực đầy đủ.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard`
+  * `EnableVirtualizationBasedSecurity` = `0` (REG_DWORD)
+
+## 6. Bật Volume Mixer cổ điển
+
+Khôi phục cửa sổ Volume Mixer cổ điển trên Windows 10:
+* Thay thế thanh trượt hiện đại bằng bộ trộn âm thanh truyền thống theo ứng dụng
+* Cho phép kiểm soát âm lượng chi tiết hơn theo từng ứng dụng
+* Được nhiều người dùng nâng cao ưa thích
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\MTCUVC`
+  * `EnableMtcUvc` = `0` (REG_DWORD)
+
+## 7. Tắt kiểm tra TPM 2.0
+
+Bỏ qua yêu cầu kiểm tra TPM 2.0, CPU và Storage khi cài đặt hoặc nâng cấp Windows 11 trên phần cứng không được hỗ trợ chính thức:
+* Bỏ qua yêu cầu TPM 2.0 tối thiểu
+* Bỏ qua yêu cầu thế hệ vi xử lý CPU
+* Bỏ qua yêu cầu kiểm tra dung lượng ổ đĩa
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\Setup\MoSetup`
+  * `AllowUpgradesWithUnsupportedTPMOrCPU` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\Setup\LabConfig`
+  * `BypassCPUCheck` = `1` (REG_DWORD)
+  * `BypassStorageCheck` = `1` (REG_DWORD)
+  * `BypassTPMCheck` = `1` (REG_DWORD)

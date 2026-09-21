@@ -1,0 +1,42 @@
+---
+title: Network Optimization
+description: Tinh chỉnh ngăn xếp TCP/IP, tối ưu kích thước gói đệm và giảm thiểu độ trễ mạng trong game.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/network/network-01.png" 
+  alt="Giao diện tab Mạng (Network)"
+/>
+
+## 2. Tổng quan
+
+**Network Optimization** can thiệp vào ngăn xếp TCP/IP của Windows: kích hoạt cơ chế nhận dữ liệu tối ưu *TCP Window Auto-Tuning*, vô hiệu hóa *Network Throttling Index* và tối ưu tần suất phản hồi gói tin ACK (*TCP Ack Frequency*) khi chơi game trực tuyến.
+
+## 3. Hướng dẫn thực hiện từng bước
+
+<Steps>
+1. Mở HyperLis, chọn tab **Mạng (Network) > Network Optimization**.
+2. Bật các tùy chọn:
+   * **Optimize TCP Window Auto-Tuning**
+   * **Disable Network Throttling Index**
+   * **Enable Receive Side Scaling (RSS)**
+   * **Optimize TCP Ack Frequency for Gaming**
+3. Nhấn **Apply Changes**.
+</Steps>
+
+## 4. Chi tiết tùy chọn & Tham số
+
+| Tham số | Giá trị | Tác dụng |
+| :--- | :--- | :--- |
+| **NetworkThrottlingIndex** | `0xFFFFFFFF` | Vô hiệu hóa bóp băng thông mạng khi chạy ứng dụng non-multimedia |
+| **TcpAckFrequency** | `1` | Gửi gói ACK ngay lập tức, giảm ping 5 - 15ms trong game online |
+| **TCP Autotuning** | `Normal` | Đảm bảo tốc độ tải file tối đa của đường truyền Internet |
+
+<Aside type="tip">
+Sau khi áp dụng, kết nối mạng sẽ tự khởi động lại trong 2 giây để nạp các giá trị TCP mới.
+</Aside>

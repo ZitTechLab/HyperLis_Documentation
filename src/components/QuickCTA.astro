@@ -1,0 +1,139 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL.slice(0, -1) 
+  : import.meta.env.BASE_URL;
+---
+
+<section class="quick-cta-banner">
+  <div class="cta-inner">
+    <div class="cta-glow"></div>
+    <div class="cta-content">
+      <h2 class="cta-title">Sẵn sàng trải nghiệm một Windows mượt mà hơn?</h2>
+      <p class="cta-desc">
+        Truy cập ngay tài liệu hướng dẫn kỹ thuật hoặc tải về công cụ HyperLis từ nhóm phát triển <strong>Zịt's Tech Lab</strong>.
+      </p>
+
+      <div class="cta-actions">
+        <a href={`${baseUrl}/getting-started/overview/`} class="btn-primary-cta">
+          <span>Xem tài liệu bắt đầu →</span>
+        </a>
+        <a href="https://github.com/ZitTechLab/HyperLis" target="_blank" rel="noopener noreferrer" class="btn-secondary-cta">
+          <span>Khám phá trên GitHub ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quick-cta-banner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 4rem 3rem 5rem 3rem;
+  }
+
+  @media (max-width: 640px) {
+    .quick-cta-banner {
+      padding: 3rem 1.25rem 4rem 1.25rem;
+    }
+  }
+
+  .cta-inner {
+    position: relative;
+    background: linear-gradient(135deg, #0f172a 0%, #090d16 100%);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 1rem;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+  }
+
+  :global(:root[data-theme='light']) .cta-inner {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-color: rgba(2, 132, 199, 0.35);
+    box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.25);
+  }
+
+  .cta-glow {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: clamp(1.6rem, 2.5vw + 1rem, 2.25rem);
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .cta-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .btn-primary-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.75rem;
+    background: #0284c7;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    text-decoration: none !important;
+    box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.39);
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary-cta:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+  }
+
+  .btn-secondary-cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #f1f5f9 !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary-cta:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+  }
+</style>

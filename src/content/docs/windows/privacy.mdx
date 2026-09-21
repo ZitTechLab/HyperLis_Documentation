@@ -1,0 +1,168 @@
+---
+title: Quyền riêng tư (Windows)
+description: Tắt dịch vụ theo dõi telemetry, Cortana, Copilot & Recall, tăng cường bảo mật và gỡ quảng cáo Start Menu.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Tắt dịch vụ theo dõi
+
+Vô hiệu hóa các dịch vụ Telemetry của Windows gửi dữ liệu chẩn đoán đến Microsoft:
+* Đặt mức telemetry về tối thiểu (Security)
+* Dừng dịch vụ DiagTrack (Connected User Experience)
+* Cải thiện đáng kể quyền riêng tư
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection`
+  * `MaxTelemetryAllowed` = `0` (REG_DWORD)
+  * `AllowTelemetry` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System`
+  * `UploadUserActivities` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection`
+  * `AllowTelemetry` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener`
+  * `Start` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener`
+  * `Start` = `0` (REG_DWORD)
+
+## 3. Tắt Cortana
+
+Vô hiệu hóa Cortana, trợ lý kỹ thuật số của Microsoft:
+* Ngăn Cortana chạy nền
+* Giảm sử dụng bộ nhớ và CPU
+* Chức năng tìm kiếm trên taskbar vẫn hoạt động bình thường
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search`
+  * `AllowCortana` = `0` (REG_DWORD)
+  * `DisableWebSearch` = `1` (REG_DWORD)
+  * `ConnectedSearchUseWeb` = `0` (REG_DWORD)
+  * `ConnectedSearchUseWebOverMeteredConnections` = `0` (REG_DWORD)
+  * `AllowCloudSearch` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings`
+  * `IsDeviceSearchHistoryEnabled` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search`
+  * `HistoryViewEnabled` = `0` (REG_DWORD)
+  * `DeviceHistoryEnabled` = `0` (REG_DWORD)
+  * `AllowSearchToUseLocation` = `0` (REG_DWORD)
+  * `BingSearchEnabled` = `0` (REG_DWORD)
+  * `CortanaConsent` = `0` (REG_DWORD)
+
+## 4. Tắt Copilot & Recall
+
+Vô hiệu hóa Windows Copilot và tính năng AI Recall:
+* Xóa nút Copilot khỏi taskbar
+* Tắt Recall (tính năng lịch sử ảnh chụp màn hình bằng AI)
+
+### Lưu ý
+Recall gây lo ngại về quyền riêng tư do chụp màn hình định kỳ.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsAI`
+  * `DisableAIDataAnalysis` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsAI`
+  * `DisableAIDataAnalysis` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\WindowsCopilot`
+  * `TurnOffWindowsCopilot` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot`
+  * `TurnOffWindowsCopilot` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `ShowCopilotButton` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge`
+  * `DefaultBrowserSettingsCampaignEnabled` = `0` (REG_DWORD)
+  * `ComposeInlineEnabled` = `0` (REG_DWORD)
+
+## 5. Tăng cường quyền riêng tư
+
+Áp dụng bộ chỉnh sửa registry để tăng cường quyền riêng tư:
+* Tắt ID quảng cáo và quảng cáo được cá nhân hóa
+* Tắt lịch sử hoạt động và dữ liệu chẩn đoán
+* Chặn theo dõi vị trí và chẩn đoán ứng dụng
+* Tắt tìm kiếm nội dung đám mây và gợi ý
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo`
+  * `Enabled` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo`
+  * `DisabledByGroupPolicy` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager`
+  * `RotatingLockScreenOverlayEnabled` = `0` (REG_DWORD)
+  * `RotatingLockScreenEnabled` = `0` (REG_DWORD)
+  * `DisableWindowsSpotlightFeatures` = `1` (REG_DWORD)
+  * `DisableTailoredExperiencesWithDiagnosticData` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CloudContent`
+  * `DisableCloudOptimizedContent` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection`
+  * `DoNotShowFeedbackNotifications` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System`
+  * `UploadUserActivities` = `0` (REG_DWORD)
+  * `AllowCrossDeviceClipboard` = `0` (REG_DWORD)
+  * `EnableActivityFeed` = `0` (REG_DWORD)
+  * `EnableCdp` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors`
+  * `DisableLocation` = `1` (REG_DWORD)
+  * `DisableLocationScripting` = `1` (REG_DWORD)
+  * `DisableWindowsLocationProvider` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location`
+  * `Value` = `"Deny"` (REG_SZ)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\InputPersonalization`
+  * `AllowInputPersonalization` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization`
+  * `RestrictImplicitTextCollection` = `1` (REG_DWORD)
+  * `RestrictImplicitInkCollection` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy`
+  * `LetAppsActivateWithVoice` = `2` (REG_DWORD)
+  * `LetAppsSyncWithDevices` = `2` (REG_DWORD)
+
+## 6. Tắt quảng cáo Start Menu
+
+Xóa quảng cáo và đề xuất được tài trợ khỏi Start Menu:
+* Tắt 'Ứng dụng được đề xuất' trong Start Menu
+* Xóa nội dung quảng cáo từ Windows
+* Làm gọn Start Menu với giao diện chuyên nghiệp hơn
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager`
+  * `SystemPaneSuggestionsEnabled` = `0` (REG_DWORD)
+  * `SubscribedContent-338388Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-338389Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-314559Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-338387Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-338393Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-353694Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-353696Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-310093Enabled` = `0` (REG_DWORD)
+  * `SubscribedContent-88000326Enabled` = `0` (REG_DWORD)
+  * `SubscribedContentEnabled` = `0` (REG_DWORD)
+  * `ContentDeliveryAllowed` = `0` (REG_DWORD)
+  * `PreInstalledAppsEverEnabled` = `0` (REG_DWORD)
+  * `SilentInstalledAppsEnabled` = `0` (REG_DWORD)
+  * `SoftLandingEnabled` = `0` (REG_DWORD)
+  * `FeatureManagementEnabled` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer`
+  * `DisableSearchBoxSuggestions` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer`
+  * `DisableSearchBoxSuggestions` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer`
+  * `AllowOnlineTips` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Mobility`
+  * `OptedIn` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.Suggested`
+  * `Enabled` = `0` (REG_DWORD)

@@ -1,0 +1,124 @@
+---
+import changelogData from '../data/changelog.json';
+import { Badge } from '@astrojs/starlight/components';
+
+// Convert changelog object to sorted array (newest first)
+const versions = Object.entries(changelogData).reverse();
+---
+
+<div class="changelog-feed">
+  {versions.map(([versionKey, data], index) => (
+    <div class="changelog-entry" id={versionKey.toLowerCase().replace(/[^a-z0-9]/g, '-')}>
+      <div class="version-header">
+        <div class="version-title-group">
+          <h3>{data.title}</h3>
+          {index === 0 && <Badge text="Bản mới nhất" variant="tip" />}
+          {versionKey.includes('BETA') && <Badge text="BETA" variant="caution" />}
+          {versionKey.includes('Chính thức') && index !== 0 && <Badge text="Chính thức" variant="note" />}
+        </div>
+        <div class="version-meta">
+          <span class="meta-label">{data.version_label}:</span>
+          <span class="meta-value">{data.version_value}</span>
+        </div>
+      </div>
+
+      <div class="version-body">
+        <div class="summary-badge">{data.summary_title}</div>
+        <ul class="changelog-list">
+          {data.content.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .changelog-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .changelog-entry {
+    background: var(--sl-color-gray-6);
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .changelog-entry:hover {
+    border-color: var(--sl-color-accent);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .version-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+    padding-bottom: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .version-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .version-title-group h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+
+  .version-meta {
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-3);
+  }
+
+  .meta-label {
+    font-weight: 600;
+    margin-right: 0.35rem;
+  }
+
+  .meta-value {
+    background: var(--sl-color-gray-5);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    color: var(--sl-color-white);
+    font-family: var(--sl-font-mono);
+  }
+
+  .summary-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--sl-color-accent);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .changelog-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--sl-color-gray-2);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .changelog-list li::marker {
+    color: var(--sl-color-accent);
+  }
+</style>

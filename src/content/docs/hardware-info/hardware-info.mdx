@@ -1,0 +1,53 @@
+---
+title: Phần cứng
+description: Tổng hợp thông tin phần cứng trực quan và các công cụ chẩn đoán sức khỏe linh kiện thiết yếu.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/hardware-info/hardware-01.png" 
+  alt="Giao diện tab Phần cứng (Hardware)"
+/>
+
+## 2. Thao tác & Thông tin
+
+Thanh công cụ phía trên cung cấp các tùy chọn xem và xuất thông tin nhanh chóng:
+* **Chế độ chi tiết**: Cho phép chuyển đổi giữa chế độ xem tổng quan rút gọn và chế độ xem chi tiết. Khi bật, hệ thống sẽ hiển thị tường tận thông số từng nhân/luồng, bộ nhớ đệm CPU, thông tin từng thanh RAM, phiên bản firmware ổ cứng, driver card đồ họa và số sê-ri bo mạch.
+* **Lưu file .txt**: Xuất toàn bộ thông tin cấu hình phần cứng ra tệp tin văn bản `SystemInfo.txt`.
+* **Sao chép tất cả**: Sao chép toàn bộ nội dung thông tin cấu hình vào bộ nhớ tạm để bạn có thể dán vào bất kỳ đâu.
+
+## 3. Thông tin phần cứng
+
+Khu vực mở rộng hiển thị đầy đủ thông số của các linh kiện cốt lõi trên máy tính:
+* **Hệ điều hành**: Phiên bản Windows đang chạy, kiến trúc hệ điều hành (64-bit hoặc 32-bit), tên máy tính, phiên bản phát hành và số bản dựng cụ thể.
+* **Vi xử lý**: Tên đầy đủ của CPU, số nhân vật lý, số luồng xử lý, trạng thái hỗ trợ ảo hóa, dung lượng bộ nhớ đệm L2/L3 và mã Stepping.
+* **Bộ nhớ RAM**: Dung lượng tổng, tốc độ bus (MHz), thông số chi tiết từng khe cắm RAM (nhà sản xuất, dung lượng từng thanh, chuẩn cắm máy bàn hay laptop) và dung lượng bộ nhớ ảo (PageFile).
+* **Bo mạch chủ**: Tên nhà sản xuất bo mạch chủ, mã hiệu sản phẩm và phiên bản phần cứng.
+* **Đồ họa**: Tên card màn hình tích hợp và card màn hình rời, dung lượng bộ nhớ đồ họa VRAM, phiên bản driver điều khiển, độ phân giải hiển thị và tần số quét màn hình (Hz).
+* **Ổ đĩa cứng**: Danh sách các ổ cứng vật lý gắn trong máy, dung lượng từng ổ, chuẩn loại đĩa (SSD/HDD), phiên bản firmware và kích thước sector.
+* **Card mạng**: Danh sách card mạng vật lý (Ethernet có dây, Wi-Fi không dây kèm địa chỉ MAC) và các bộ chuyển đổi mạng ảo.
+* **BIOS**: Nhà sản xuất BIOS, phiên bản BIOS SMBIOS và số sê-ri phần cứng.
+
+## 4. Công cụ kiểm tra sức khoẻ
+
+Bộ công cụ chẩn đoán chuyên sâu giúp đánh giá tình trạng hoạt động và tuổi thọ linh kiện:
+* **Kiểm tra sức khoẻ ổ cứng**:
+  * Nhấn nút **Kiểm tra** để hệ thống quét toàn diện các ổ cứng vật lý trong máy tính.
+  * Báo cáo cung cấp các chỉ số S.M.A.R.T quan trọng:
+    * Dung lượng ổ đĩa, loại chip nhớ và chuẩn giao tiếp kết nối.
+    * Dự đoán nguy cơ hỏng hóc từ bộ điều khiển ổ đĩa.
+    * Nhiệt độ hoạt động thực tế (°C).
+    * Tỷ lệ sức khỏe ước tính (%) và thang đánh giá trực quan (Rất tốt, Cảnh báo, Nguy hiểm).
+    * Tổng thời gian ổ đĩa đã hoạt động (tính theo giờ và quy đổi ra số ngày).
+    * Độ trễ đọc và ghi dữ liệu tối đa (ms).
+* **Kiểm tra Pin**:
+  * Nhấn nút **Kiểm tra** để hệ thống tự động nhận diện thiết bị và đo lường tình trạng pin:
+    * Phần trăm pin còn lại hiện tại.
+    * Dung lượng pin thiết kế ban đầu từ nhà sản xuất (mWh).
+    * Dung lượng pin tối đa khi sạc đầy hiện tại (mWh).
+    * Tỷ lệ chai pin (%) và tỷ lệ sức khỏe còn lại của pin.
+    * Thông tin khuyến cáo nếu pin đã quá cũ hoặc bị suy giảm dung lượng nghiêm trọng.

@@ -1,0 +1,112 @@
+================================================================================
+          HƯỚNG DẪN CHỈNH SỬA & PHÁT TRIỂN TÀI LIỆU HYPERLIS DOCS
+================================================================================
+
+Tài liệu này hướng dẫn chi tiết cách thêm bài viết, tạo tab mới, chèn hình ảnh và 
+vận hành website tài liệu HyperLis.
+
+--------------------------------------------------------------------------------
+1. CẤU TRÚC THƯ MỤC CHÍNH CỦA DỰ ÁN
+--------------------------------------------------------------------------------
+- src/content/docs/      : Chứa toàn bộ các bài viết tài liệu (.mdx) chia theo 16 tab.
+- src/templates/         : Chứa tệp bài viết mẫu (bai-viet-mau.mdx) để copy tạo bài mới.
+- src/components/        : Chứa các thành phần giao diện (Screenshot, Header, Toggle...).
+- public/images/hyperlis/: Chứa toàn bộ hình ảnh giao diện chia theo 16 tab.
+- astro.config.mjs       : Cấu hình hệ thống, thanh điều hướng Sidebar 16 tab.
+
+--------------------------------------------------------------------------------
+2. CÁCH THÊM BÀI VIẾT MỚI VÀO MỘT TAB CÓ SẴN
+--------------------------------------------------------------------------------
+Ví dụ: Bạn muốn thêm bài "Tối ưu RAM ảo" vào Tab "Dọn dẹp" (cleanup):
+
+Bước 1: Mở tệp mẫu "src/templates/bai-viet-mau.mdx" và copy toàn bộ nội dung.
+Bước 2: Tạo một tệp mới trong thư mục tab tương ứng:
+        "src/content/docs/cleanup/virtual-memory.mdx"
+        Dán nội dung vào và chỉnh sửa phần chữ tiếng Việt bên trong.
+
+Bước 3: Đăng ký bài viết mới vào thanh Sidebar:
+        Mở tệp "astro.config.mjs", tìm đến mục "7. Dọn dẹp" và thêm 1 dòng:
+        { label: 'Tối ưu RAM ảo', slug: 'cleanup/virtual-memory' },
+
+Bước 4: Lưu file. Trình duyệt localhost sẽ tự động cập nhật bài viết mới ngay lập tức.
+
+--------------------------------------------------------------------------------
+3. CÁCH THÊM MỘT TAB MỚI HOÀN TOÀN (VÍ DỤ TAB 17)
+--------------------------------------------------------------------------------
+Bước 1: Tạo thư mục tab mới trong "src/content/docs/"
+        Ví dụ: "src/content/docs/ssd-tools/"
+
+Bước 2: Tạo các bài viết .mdx bên trong thư mục vừa tạo.
+
+Bước 3: Mở tệp "astro.config.mjs", thêm Tab mới vào cuối danh sách "sidebar":
+        {
+            label: '17. Công cụ SSD',
+            items: [
+                { label: 'Tối ưu hóa TRIM & S.M.A.R.T', slug: 'ssd-tools/trim-smart' },
+            ],
+        },
+
+--------------------------------------------------------------------------------
+4. QUY TẮC QUẢN LÝ & CHÈN HÌNH ẢNH
+--------------------------------------------------------------------------------
+A. ẢNH ĐẠI DIỆN CHUNG CHO TỪNG TAB (Tổng cộng 17 ảnh cho 17 Tab):
+   Mỗi tab chỉ cần ảnh chụp giao diện lưu vào thư mục "public/images/hyperlis/[tên_tab]/":
+   - Tab 1  (Dashboard)   : public/images/hyperlis/dashboard/dashboard-01.png
+   - Tab 2  (Chung)        : public/images/hyperlis/general/general-01.png
+   - Tab 3  (Windows)      : public/images/hyperlis/windows/windows-01.png
+   - Tab 4  (Ứng dụng UWP) : public/images/hyperlis/uwp-apps/uwp-apps-01.png
+   - Tab 5  (Khởi chạy)    : public/images/hyperlis/startup-apps/startup-apps-01.png
+   - Tab 6  (Tải xuống)    : public/images/hyperlis/downloads/downloads-01.png
+   - Tab 7  (Dọn dẹp)      : public/images/hyperlis/cleanup/cleanup-01.png
+   - Tab 8  (Mạng)         : public/images/hyperlis/network/network-01.png
+   - Tab 9  (USB Boot)     : public/images/hyperlis/usb-boot/usb-boot-01.png
+   - Tab 10 (Phần cứng)    : public/images/hyperlis/hardware/hardware-01.png
+   - Tab 11 (QL Bản quyền) : public/images/hyperlis/license/license-01.png
+   - Tab 12 (Đổi phiên bản): public/images/hyperlis/convert-skus/convert-skus-01.png
+   - Tab 13 (Cài đặt Office): public/images/hyperlis/office-setup/office-setup-01.png
+   - Tab 14 (Tính năng khác): public/images/hyperlis/extend-features/extend-features-01.png
+   - Tab 15 (WSAP)         : public/images/hyperlis/wsap/wsap-01.png
+   - Tab 16 (Sửa lỗi máy in): public/images/hyperlis/printer-repair/printer-repair-01.png
+   - Tab 17 (Sửa lỗi Windows): public/images/hyperlis/windows-repair/windows-repair-01.png
+
+B. CHÈN THÊM ẢNH MINH HỌA VÀO CÁC MỤC H2, H3 BÊN DƯỚI BÀI VIẾT:
+   Bạn chỉ cần đặt thẻ <Screenshot /> vào vị trí mong muốn trong file .mdx:
+   
+   <Screenshot 
+     src="/images/hyperlis/general/general-02.png" 
+     alt="Mô tả hình ảnh" 
+     caption="Hình 2: Chú thích chi tiết cho bức ảnh" 
+   />
+
+--------------------------------------------------------------------------------
+5. CÁC THẺ GIAO DIỆN (COMPONENTS) CÓ THỂ SỬ DỤNG TRONG BÀI VIẾT
+--------------------------------------------------------------------------------
+1. Hộp cảnh báo / Ghi chú (Aside):
+   <Aside type="note">Nội dung ghi chú thông thường.</Aside>
+   <Aside type="tip">Mẹo hoặc khuyến nghị hữu ích.</Aside>
+   <Aside type="caution">Cảnh báo lưu ý trước khi làm.</Aside>
+   <Aside type="danger">Cảnh báo nguy cơ lỗi hệ thống.</Aside>
+
+2. Danh sách các bước thực hiện có đánh số (Steps):
+   <Steps>
+   1. Bước 1: Mở phần mềm.
+   2. Bước 2: Chọn tính năng cần tối ưu.
+   3. Bước 3: Nhấn Apply.
+   </Steps>
+
+3. Bảng Markdown căn chỉnh chuẩn:
+   | Tiêu đề cột 1 | Tiêu đề cột 2 |
+   | :--- | :--- |
+   | Dữ liệu hàng 1 | Giá trị 1 |
+   | Dữ liệu hàng 2 | Giá trị 2 |
+
+--------------------------------------------------------------------------------
+6. CÁC LỆNH CHẠY WEBSITE DÀNH CHO BẠN
+--------------------------------------------------------------------------------
+- Khởi chạy server kiểm thử trên máy:
+  npm run dev
+  -> Sau đó mở trình duyệt truy cập: http://localhost:4321/
+
+- Biên dịch kiểm tra toàn bộ website không có lỗi:
+  npm run build
+================================================================================

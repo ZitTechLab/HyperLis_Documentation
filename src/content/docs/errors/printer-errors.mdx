@@ -1,0 +1,45 @@
+---
+title: Sửa lỗi máy in
+description: Chẩn đoán, xử lý nhanh các sự cố chia sẻ và kết nối máy in trong mạng nội bộ, dọn dẹp driver in ấn.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/errors/printer-repair-01.png" 
+  alt="Giao diện tab Sửa lỗi (Errors)"
+/>
+
+## 2. Các mã lỗi chia sẻ máy in hỗ trợ
+
+Khu vực danh sách lựa chọn triệu chứng hoặc mã lỗi máy in cụ thể mà hệ thống đang gặp phải trong quá trình kết nối mạng LAN:
+
+* **0x0000011b:** Lỗi phổ biến xuất hiện sau các bản cập nhật bảo mật của Windows, làm chặn việc kết nối máy in dùng chung do yêu cầu mức độ xác thực quyền riêng tư RPC nghiêm ngặt.
+* **0x00000709:** Lỗi không thể kết nối hoặc không thể gán máy in làm mặc định do xung đột tệp tin hệ thống của dịch vụ in ấn.
+* **0x0000007c:** Lỗi phát sinh từ thiết lập bảo mật quyền riêng tư của giao thức kết nối từ xa.
+* **0x00000bc4:** Lỗi máy tính không thể tìm thấy máy in chia sẻ qua giao thức mạng TCP/IP.
+* **0x00000040:** Lỗi kết nối bị chặn bởi hệ thống tường lửa mạng nội bộ.
+* **0x000006d9:** Lỗi dịch vụ tường lửa Windows bị tắt hoặc gặp sự cố ngăn cản việc mở cổng chia sẻ in ấn.
+* **0x000003e3:** Lỗi kết nối và truy cập tài nguyên máy in chia sẻ qua giao thức mạng nội bộ SMB.
+* **0x00000012:** Lỗi xác thực tài khoản và chứng thực quyền truy cập khi vào máy in chia sẻ.
+* **0x000003eb:** Lỗi thư mục đệm in ấn bị hỏng hoặc đầy bộ đệm truyền nhận dữ liệu.
+* **0x00000771:** Lỗi cấu hình các tham số cổng in ấn trong sổ đăng ký hệ thống.
+* **Lỗi chính sách ngăn kết nối:** Lỗi do chính sách bảo mật hệ thống áp đặt ngăn chặn việc cài đặt hoặc kết nối máy in từ xa.
+* **Lỗi giao tiếp truyền thông:** Tín hiệu kết nối giữa máy tính và máy in bị gián đoạn hoặc không đồng bộ.
+* **Không thể kết nối:** Lỗi kết nối chung khi máy khách không tìm thấy máy chủ chia sẻ máy in.
+* **Sửa lỗi tổng hợp:** Giải pháp tích hợp tự động áp dụng toàn bộ các bản vá cấu hình mạng LAN và giao thức in ấn chỉ trong một lần nhấn.
+* **Xóa hàng đợi in:** Xóa sạch toàn bộ các lệnh in đang bị kẹt, lỗi hoặc treo trong hàng đợi, khôi phục lại dịch vụ in ấn về trạng thái sẵn sàng.
+
+## 3. Các nút thao tác
+
+* **Bấm "Bắt đầu Sửa lỗi"** để tự động áp dụng quy trình tinh chỉnh cấu hình tương ứng với mã lỗi đã chọn từ danh sách và khởi động lại dịch vụ in ấn.
+* **Bấm "Gỡ toàn bộ Driver Máy In"** để dọn dẹp sạch sẽ toàn bộ các trình điều khiển máy in đang lưu trữ trên máy tính:
+  * Xóa toàn bộ driver máy in trong kho lưu trữ trình điều khiển hệ thống.
+  * Tạm dừng và làm mới lại dịch vụ in ấn.
+  * Xóa sạch hàng đợi in và các tệp đệm in ấn tạm thời.
+  * Đặt lại các nhánh cấu hình máy in và cổng in trong sổ đăng ký hệ thống về trạng thái ban đầu.
+* **Bấm "Quản lý Máy in"** để mở nhanh bảng điều khiển quản lý máy in nâng cao của Windows để xem danh sách máy in, cổng kết nối và các gói driver đã cài.
+* **Bấm "Thêm Máy In"** để mở nhanh cửa sổ dò tìm và thêm máy in mới trong hệ thống.

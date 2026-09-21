@@ -1,0 +1,372 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
+
+const lang = Astro.currentLocale || 'vi';
+
+const i18n = {
+  vi: {
+    title1: 'Tối ưu & Tùy biến Windows',
+    title2: 'theo cách bạn thực sự muốn',
+    tagline: 'Tăng tốc hiệu năng, dọn dẹp hệ thống, sửa lỗi máy in mạng, gỡ bỏ ứng dụng rác và quản lý bản quyền — tất cả trong một công cụ duy nhất, trực quan và minh bạch 100%.',
+    btnDoc: 'Đọc tài liệu HDSD',
+    btnGit: 'Xem trên GitHub',
+    caption: 'Miễn phí. Trực quan. Không telemetry, an toàn và minh bạch 100%.',
+    imgAlt: 'Giao diện phần mềm HyperLis'
+  },
+  en: {
+    title1: 'Optimize & Customize Windows',
+    title2: 'the way you actually want',
+    tagline: 'Boost performance, clean the system, fix network printer errors, remove bloatware, and manage licenses — all in a single, intuitive, and 100% transparent tool.',
+    btnDoc: 'Read the Docs',
+    btnGit: 'View on GitHub',
+    caption: 'Free. Intuitive. No telemetry, secure and 100% transparent.',
+    imgAlt: 'HyperLis Software Interface'
+  }
+};
+const t = i18n[lang] || i18n['vi'];
+const docUrl = lang === 'en' ? `${baseUrl}/en/getting-started/overview/` : `${baseUrl}/getting-started/overview/`;
+---
+
+<section class="wu-hero not-content">
+  <div class="wu-hero-grid" aria-hidden="true"></div>
+  <div class="wu-hero-glow" aria-hidden="true"></div>
+
+  <div class="wu-hero-inner">
+    <!-- Left Copy -->
+    <div class="wu-hero-copy">
+      <div class="wu-brand-header">
+        <span class="wu-brand-title">HyperLis</span>
+      </div>
+      <h1 class="wu-hero-title">
+        {t.title1} <br class="hidden sm:inline" />
+        <span class="gradient-text">{t.title2}</span>
+      </h1>
+      <p class="wu-hero-tagline">
+        {t.tagline}
+      </p>
+
+      <div class="wu-hero-actions">
+        <a href={docUrl} class="wu-btn wu-btn-primary">
+          <span>{t.btnDoc}</span>
+          <svg aria-hidden="true" class="wu-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"></path>
+          </svg>
+        </a>
+
+        <a href="https://github.com/ZitTechLab/HyperLis" target="_blank" rel="noopener noreferrer" class="wu-btn wu-btn-secondary">
+          <span>{t.btnGit}</span>
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.33 10.18a1 1 0 0 1-.77 0 1 1 0 0 1-.62-.93l.01-1.83-8.2 8.2a1 1 0 0 1-1.41-1.42l8.2-8.2H14.7a1 1 0 0 1 0-2h4.25a1 1 0 0 1 1 1v4.25a1 1 0 0 1-.62.93Z"></path>
+            <path d="M11 4a1 1 0 1 1 0 2H7a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-4a1 1 0 1 1 2 0v4a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4Z"></path>
+          </svg>
+        </a>
+      </div>
+
+      <p class="wu-hero-caption">{t.caption}</p>
+    </div>
+
+    <!-- Right Media (Clean Real Image Showcase) -->
+    <div class="wu-hero-media">
+      <div class="wu-hero-img-frame">
+        <img 
+          src={`${baseUrl}/images/hyperlis/dashboard/dashboard-01.png`} 
+          alt={t.imgAlt} 
+          loading="eager" 
+          class="wu-hero-img"
+          onerror={`if (this.src !== '${baseUrl}/images/hyperlis/placeholder.svg') { this.src = '${baseUrl}/images/hyperlis/placeholder.svg'; }`}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.main-pane > main > .content-panel:first-child),
+  :global(h1#_top) {
+    display: none !important;
+  }
+
+  :global(.content-panel:first-child) {
+    display: none !important;
+  }
+
+  :global(body:not([data-has-sidebar]) .main-pane),
+  :global(body:not([data-has-sidebar]) .content-panel),
+  :global(body:not([data-has-sidebar]) .sl-container),
+  :global(body:not([data-has-sidebar]) .sl-markdown-content),
+  :global(body:has(.wu-hero) .main-pane),
+  :global(body:has(.wu-hero) main),
+  :global(body:has(.wu-hero) .content-panel),
+  :global(body:has(.wu-hero) .sl-container),
+  :global(body:has(.wu-hero) .sl-markdown-content) {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  :global(body:not([data-has-sidebar]) .pagination-links),
+  :global(body:has(.wu-hero) .pagination-links),
+  :global(body:has(.wu-hero) .content-panel > footer.sl-flex),
+  :global(body:has(.wu-hero) .sl-container > footer.sl-flex) {
+    display: none !important;
+  }
+
+  /* Base Hero Section: Phủ kín 100% viewport từ thanh topbar xuống sát đáy màn hình */
+  .wu-hero {
+    position: relative;
+    min-height: calc(100vh + 25px);
+    min-height: calc(100dvh + 25px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 2rem 3.5rem;
+    overflow: hidden;
+    width: 100%;
+    margin-top: -25px; /* Dịch chuyển sát mép dưới topbar */
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--wu-hero-bg);
+    border-bottom: 1px solid var(--wu-border);
+  }
+
+  /* Light Theme */
+  :global(:root),
+  :global(:root[data-theme='light']) {
+    --wu-hero-bg: #f8fafc;
+    --wu-title-color: #0f172a;
+    --wu-desc-color: #475569;
+    --wu-border: #e2e8f0;
+    --wu-grid: rgba(0, 0, 0, 0.05);
+    --wu-glow: radial-gradient(circle, rgba(2, 132, 199, 0.14) 0%, rgba(14, 165, 233, 0.03) 55%, transparent 75%);
+    --wu-gradient: linear-gradient(135deg, #0284c7 0%, #4338ca 100%);
+    --wu-btn-sec-bg: #ffffff;
+    --wu-btn-sec-border: #cbd5e1;
+    --wu-btn-sec-text: #1e293b;
+    --wu-btn-sec-hover-bg: #f1f5f9;
+    --wu-img-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Dark Theme */
+  :global(:root[data-theme='dark']) {
+    --wu-hero-bg: #090d16;
+    --wu-title-color: #ffffff;
+    --wu-desc-color: #94a3b8;
+    --wu-border: rgba(255, 255, 255, 0.08);
+    --wu-grid: rgba(255, 255, 255, 0.04);
+    --wu-glow: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, rgba(2, 132, 199, 0.06) 55%, transparent 80%);
+    --wu-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    --wu-btn-sec-bg: rgba(255, 255, 255, 0.05);
+    --wu-btn-sec-border: rgba(255, 255, 255, 0.15);
+    --wu-btn-sec-text: #e2e8f0;
+    --wu-btn-sec-hover-bg: rgba(255, 255, 255, 0.1);
+    --wu-img-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(14, 165, 233, 0.12);
+  }
+
+  /* Caro Grid Background */
+  .wu-hero-grid {
+    position: absolute;
+    inset: 0;
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, var(--wu-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--wu-grid) 1px, transparent 1px);
+    pointer-events: none;
+  }
+
+  .wu-hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 650px;
+    background: var(--wu-glow);
+    filter: blur(70px);
+    pointer-events: none;
+  }
+
+  /* Grid Layout: Left Copy & Right Media */
+  .wu-hero-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
+    }
+  }
+
+  /* Left Copy */
+  .wu-brand-header {
+    margin-bottom: 0.35rem;
+  }
+
+  .wu-brand-title {
+    font-size: clamp(2.25rem, 4.5vw, 3.85rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: var(--wu-title-color);
+    display: inline-block;
+  }
+
+  .wu-hero-title {
+    font-size: clamp(1.45rem, 2.35vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--wu-title-color);
+    margin-bottom: 0.85rem;
+  }
+
+  .gradient-text {
+    background: var(--wu-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .wu-hero-tagline {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--wu-desc-color);
+    margin-bottom: 1.35rem;
+    max-width: 530px;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-tagline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* CTAs */
+  .wu-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-actions {
+      justify-content: center;
+    }
+  }
+
+  .wu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.72rem 1.4rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  .wu-btn-primary {
+    background: #0284c7;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.39);
+  }
+
+  .wu-btn-primary:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+  }
+
+  .wu-btn-secondary {
+    background: var(--wu-btn-sec-bg);
+    border: 1px solid var(--wu-btn-sec-border);
+    color: var(--wu-btn-sec-text) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  .wu-btn-secondary:hover {
+    background: var(--wu-btn-sec-hover-bg);
+    color: var(--wu-title-color) !important;
+    transform: translateY(-2px);
+  }
+
+  .wu-icon-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .wu-btn-primary:hover .wu-icon-arrow {
+    transform: translateX(3px);
+  }
+
+  .wu-hero-caption {
+    font-size: 0.8rem;
+    color: var(--wu-desc-color);
+    opacity: 0.85;
+    margin: 0;
+  }
+
+  /* Right Media: Căn giữa theo chiều dọc và mở rộng vừa khít placeholder bo tròn */
+  .wu-hero-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  .wu-hero-img-frame {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--wu-border);
+    box-shadow: var(--wu-img-shadow);
+    background-color: var(--wu-btn-sec-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .wu-hero-img-frame:hover {
+    transform: translateY(-3px);
+  }
+
+  .wu-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0.75rem;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero {
+      min-height: auto;
+      padding: 3rem 1.5rem;
+      margin-top: 0;
+    }
+
+    .wu-hero-img-frame {
+      max-width: 520px;
+      margin: 0 auto;
+    }
+  }
+</style>

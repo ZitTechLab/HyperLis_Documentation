@@ -1,0 +1,32 @@
+---
+title: Ping Tool & Diagnostics
+description: Công cụ kiểm tra độ trễ Ping, jitter và tỷ lệ mất gói (Packet Loss) tới các máy chủ game và DNS.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/network/network-01.png" 
+  alt="Giao diện tab Mạng (Network)"
+/>
+
+## 2. Tổng quan
+
+**Ping Tool** là tiện ích chẩn đoán mạng tích hợp sẵn trong HyperLis, cho phép kiểm tra độ trễ (Ping / Latency), độ dao động (Jitter) và tỷ lệ rớt gói (Packet Loss %) tới các máy chủ phổ biến (Google, Cloudflare, Valve Singapore, Riot HK, AWS Tokyo).
+
+## 3. Hướng dẫn sử dụng
+
+<Steps>
+1. Mở HyperLis, chọn tab **Mạng (Network) > Ping Tool**.
+2. Chọn máy chủ từ danh sách gợi ý hoặc nhập địa chỉ IP / Domain cần test.
+3. Chọn số lượng gói tin (ví dụ: 10, 50 gói hoặc Ping liên tục).
+4. Nhấn **Start Ping Test**.
+5. Xem biểu đồ độ trễ và thống kê Min / Max / Average Ping.
+</Steps>
+
+<Aside type="tip">
+Bạn có thể chạy Ping Tool trước và sau khi kích hoạt [Network Optimization](/network/network-optimization/) để so sánh mức độ cải thiện độ trễ thực tế.
+</Aside>

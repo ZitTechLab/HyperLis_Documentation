@@ -1,0 +1,75 @@
+---
+title: Sửa lỗi Windows
+description: Chẩn đoán và khắc phục tự động các sự cố thường gặp trên hệ điều hành Windows, sửa file hệ thống, lỗi mạng và giao diện.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/errors/windows-repair-01.png" 
+  alt="Giao diện tab Sửa lỗi (Errors)"
+/>
+
+## 2. Danh sách các công cụ sửa lỗi và chẩn đoán
+
+### Quét SFC & DISM (Sửa file hệ thống)
+* Tự động quét toàn diện và đối soát tính toàn vẹn của hệ điều hành.
+* Thay thế và khôi phục các tệp tin hệ thống bị hỏng, mất mát hoặc bị ghi đè thông qua kho dữ liệu gốc của Windows.
+
+### Sửa lỗi đăng nhập Profile (.bak)
+* Khắc phục triệt để sự cố người dùng bị đăng nhập vào tài khoản tạm thời do nhánh khóa hồ sơ người dùng trong sổ đăng ký bị đổi đuôi thành tệp sao lưu (.bak).
+* Tự động hoàn trả hồ sơ gốc để người dùng lấy lại toàn bộ dữ liệu màn hình chính và cài đặt cá nhân.
+
+### Sửa lỗi truy cập SMB Guest (Chia sẻ file)
+* Khắc phục lỗi không thể truy cập vào máy chủ tệp tin, ổ cứng mạng hoặc máy tính khác trong mạng nội bộ.
+* Kích hoạt quyền cho phép đăng nhập tài khoản khách không an toàn và tinh chỉnh giao thức xác thực mạng LAN.
+
+### Sửa lỗi Icon/Thumbnail (Bộ nhớ đệm)
+* Xử lý hiện tượng biểu tượng ứng dụng bị biến thành tờ giấy trắng hoặc hình thu nhỏ (thumbnail) của tệp tin không hiển thị.
+* Xóa sạch toàn bộ các tệp cơ sở dữ liệu đệm biểu tượng cũ và tái tạo lại bộ nhớ đệm mới.
+
+### Sửa lỗi Màn hình xanh NETIO.SYS
+* Khắc phục lỗi màn hình xanh sập nguồn do xung đột chồng giao thức mạng hoặc trình điều khiển mạng.
+* Thiết lập lại ngăn xếp mạng, giao thức kết nối socket và tường lửa hệ thống về trạng thái mặc định.
+
+### Tắt BitLocker (Giải mã toàn bộ ổ)
+* Gửi lệnh tự động giải mã toàn bộ dữ liệu trên các phân vùng ổ đĩa và tắt tính năng mã hóa ổ cứng.
+* Loại bỏ hoàn toàn nguy cơ bị khóa máy đòi khóa khôi phục ngoài ý muốn.
+
+### Sửa lỗi xem trước File (Preview)
+* Khắc phục lỗi không xem trước được nội dung tài liệu, bảng tính hoặc hình ảnh trong khung xem trước (Preview) của cửa sổ quản lý tệp tin.
+* Tự động bỏ chặn các tệp tin tải về từ nguồn bên ngoài và kích hoạt lại trình xử lý xem trước.
+
+### Sửa lỗi Thanh tìm kiếm (Search)
+* Xử lý sự cố thanh tìm kiếm trên thanh tác vụ bị đơ, không gõ được chữ hoặc không hiển thị kết quả.
+* Khởi động lại dịch vụ tìm kiếm hệ thống của Windows.
+
+### Sửa lỗi Font chữ & ClearType
+* Dọn dẹp sạch sẽ bộ nhớ đệm phông chữ của hệ điều hành và khởi động lại dịch vụ hiển thị chữ.
+* Khắc phục lỗi hiển thị sai phông, chữ bị răng cưa hoặc nhòe mờ.
+
+### Sửa lỗi Windows Update
+* Khắc phục lỗi không thể kiểm tra hoặc tải về các bản cập nhật mới của hệ điều hành.
+* Dừng các dịch vụ liên quan, xóa sạch thư mục lưu trữ bản cập nhật tải về bị lỗi và khởi động lại dịch vụ cập nhật.
+
+### Sửa lỗi Mạng (Reset IP/DNS/Winsock)
+* Giải pháp toàn diện cho các sự cố mất kết nối Internet, lỗi phân giải tên miền hoặc bị chập chờn mạng.
+* Làm mới địa chỉ mạng, xóa bộ nhớ đệm tên miền và tái khởi tạo giao thức truyền thông mạng.
+
+### Sửa lỗi Windows Store (WSReset)
+* Đặt lại bộ nhớ đệm của Cửa hàng ứng dụng Windows và đăng ký lại toàn bộ ứng dụng hệ điều hành về trạng thái chuẩn ban đầu.
+
+## 3. Các nút thao tác
+
+* **Nút "Bắt đầu sửa":** Tiến hành xử lý lỗi đã chọn từ danh sách, hiển thị thanh tiến trình và tự động hoàn tất quá trình sửa chữa.
+* **Nút "Tự động chẩn đoán":** Tính năng kiểm tra thông minh tự động rà soát các thành phần then chốt của hệ thống:
+  * Trạng thái hoạt động của dịch vụ in ấn.
+  * Trạng thái dịch vụ chia sẻ mạng nội bộ.
+  * Tính toàn vẹn của các thư viện tệp tin hệ thống.
+  * Tình trạng hoạt động của dịch vụ tường lửa.
+  * Dịch vụ dò tìm và nhận diện thiết bị mạng.
+
+*Sau khi quét xong, phần mềm sẽ hiển thị tổng số lỗi phát hiện và cho phép người dùng lựa chọn tự động sửa chữa toàn bộ chỉ với một thao tác xác nhận.*

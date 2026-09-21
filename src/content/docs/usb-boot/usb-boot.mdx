@@ -1,0 +1,50 @@
+---
+title: USB Boot
+description: Tạo USB Multi-Boot đa năng chứa nhiều bộ cài Windows, WinPE cứu hộ và các công cụ quản lý USB Boot.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/usb-boot/usb-boot-01.png" 
+  alt="Giao diện tab USB Boot"
+/>
+
+## 2. Quy trình tạo USB Boot tự động
+
+* **Bước 1: Chọn USB / Ổ đĩa của bạn**:
+  * Hệ thống tự động liệt kê toàn bộ các thiết bị lưu trữ di động (USB Flash Drive, ổ cứng gắn ngoài) kèm theo tên thiết bị và dung lượng cụ thể.
+  * Nút **Quét Lại Ổ Đĩa**: Quét lại danh sách nếu HyperLis không nhận diện được USB/Ổ cứng ngoài vừa cắm vào.
+* **Bước 2: Chọn File ISO**:
+  * **Chọn phiên bản Windows**: Tải trực tiếp các bản Windows được tối ưu sẵn từ HyperLis (sẽ được cập nhật sau (～￣▽￣)～).
+  * **Chọn File ISO Cục Bộ**: Nếu đã có sẵn file ISO trên máy, bạn chỉ cần nhấn nút **Chọn file** để trỏ đường dẫn tới file `.iso` cần dùng.
+* **Bước 3: Bắt đầu tạo USB Boot**:
+  * Nhấn vào nút **Bắt đầu** để tiến hành cài đặt USB Boot.
+  * Hệ thống sẽ hiển thị hộp thoại cảnh báo xác nhận xóa dữ liệu (Format) trên ổ USB đã chọn để đảm bảo an toàn.
+  * Tự động tải file ISO về máy (nếu chọn tải trực tuyến).
+  * Tự động cài đặt Ventoy phiên bản mới nhất kèm giao diện tùy chỉnh với định dạng phân vùng ExFAT.
+  * Sao chép tệp ISO vào thư mục `ISO` trên USB với thanh tiến trình phần trăm hiển thị trực quan theo thời gian thực.
+
+## 3. Tải ISO từ nguồn khác
+
+Nếu muốn tìm kiếm các bản cài đặt Windows khác, tính năng này cung cấp danh sách liên kết dẫn trực tiếp đến các trang chia sẻ bộ cài Windows của Microsoft từ các nguồn khác nhau:
+* **Microsoft**: Trang tải bản cài đặt Windows chính thức từ Microsoft.
+* **PITVN Community**: Kho lưu trữ Google Drive các bộ cài Windows nguyên gốc và tối ưu hóa từ cộng đồng PITVN.
+* **Massgrave**: Kho liên kết tải bộ cài Windows chính hãng (Genuine Installation Media).
+* **Anhdv Boot**: Kho ISO cài đặt hệ điều hành và công cụ cứu hộ máy tính từ Anhdv Boot.
+* **21AK22**: Chuyên trang chia sẻ các bộ cài Windows chuẩn sạch và ổn định.
+* **UUP Dump**: Tải về và đóng gói file ISO Windows cập nhật mới nhất trực tiếp từ máy chủ Microsoft.
+* **3steam, Quang Huy Blog, Fido**: Các nguồn tải ISO và công cụ script tạo bộ cài Windows tin cậy.
+* Nhấn nút **Đi thôi (Let's go)** để mở liên kết trên trình duyệt web của bạn.
+
+## 4. Các chức năng bổ trợ & Quản lý
+
+Bộ công cụ mở rộng giúp bạn linh hoạt quản lý USB Boot theo từng nhu cầu riêng biệt:
+* **Chỉ tải file ISO**: Cho phép tải riêng file ISO từ máy chủ lưu trữ về thư mục `Download` của phần mềm mà không cần cắm USB. Sau khi tải xong, hệ thống sẽ gợi ý mở thư mục chứa file để bạn kiểm tra.
+* **Chỉ tạo Menu Boot**: Cài đặt nền tảng bootloader Ventoy và giao diện HyperLis vào USB mà không sao chép tệp ISO. Phù hợp khi bạn muốn chuẩn bị sẵn USB Boot hoặc đã có sẵn file ISO bên ngoài.
+* **Thêm ISO vào USB có sẵn**: Sao chép thêm bất kỳ file ISO Windows hoặc WinPE mới nào vào thư mục `/ISO` trên chiếc USB đã được tạo boot trước đó mà **hoàn toàn không làm mất dữ liệu** hay phải format lại USB.
+* **Vào BIOS/UEFI**: Tự động khởi động lại máy tính và chuyển thẳng vào màn hình cài đặt BIOS/UEFI của bo mạch chủ, giúp bạn không cần phải canh nhấn phím tắt (F2, F12, Del...) lúc mở máy.
+* **Sửa lỗi WMIC**: Tự động kích hoạt lại công cụ Windows Management Instrumentation Command-line (WMIC) vốn bị tắt mặc định trên Windows 11 24H2 trở lên, giúp phần mềm nhận diện chính xác danh sách ổ đĩa.

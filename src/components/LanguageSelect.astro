@@ -1,0 +1,174 @@
+---
+
+const currentLocale = Astro.currentLocale || 'root';
+const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function getPathForLocale(locale) {
+  let pathWithoutBase = currentPath;
+  if (base && pathWithoutBase.startsWith(base)) {
+    pathWithoutBase = pathWithoutBase.substring(base.length);
+  }
+  
+  if (currentLocale !== 'root' && currentLocale !== 'vi') {
+    const regex = new RegExp(`^/${currentLocale}(/|$)`);
+    pathWithoutBase = pathWithoutBase.replace(regex, '/');
+  }
+
+  if (pathWithoutBase === '') pathWithoutBase = '/';
+  
+  if (locale === 'root' || locale === 'vi') {
+    return base + pathWithoutBase;
+  } else {
+    return base + '/' + locale + (pathWithoutBase === '/' ? '' : pathWithoutBase);
+  }
+}
+
+const locales = [
+  { code: 'vi', label: 'Tiếng Việt', flag: '/images/flags/vn.svg' },
+  { code: 'en', label: 'English', flag: '/images/flags/us.svg' }
+];
+
+const currentLang = locales.find(l => l.code === (currentLocale === 'root' ? 'vi' : currentLocale)) || locales[0];
+---
+
+<div class="custom-lang-select">
+  <details class="lang-dropdown">
+    <summary class="lang-summary" aria-haspopup="listbox">
+      <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="translate-icon"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+      <span class="lang-current">{currentLang.label}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="caret"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <ul class="lang-menu" role="listbox">
+      {locales.map(l => {
+        const isActive = l.code === (currentLocale === 'root' ? 'vi' : currentLocale);
+        return (
+          <li role="presentation">
+            <a href={getPathForLocale(l.code)} class={isActive ? 'active' : ''} role="option" aria-selected={isActive}>
+              <img src={base + l.flag} alt={l.label} class="flag-icon" />
+              <span>{l.label}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </details>
+</div>
+
+<style>
+  .custom-lang-select {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-dropdown {
+    position: relative;
+  }
+
+  .lang-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    list-style: none;
+    color: var(--sl-color-gray-1);
+    font-size: var(--sl-text-sm);
+    padding: 0.35rem 0.5rem;
+    border-radius: 0.375rem;
+    user-select: none;
+    transition: color 0.15s;
+  }
+
+  .lang-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .lang-summary:hover {
+    color: var(--sl-color-gray-2);
+  }
+
+  .translate-icon {
+    font-size: 0.875rem;
+  }
+
+  .caret {
+    font-size: 1.25rem;
+    transition: transform 0.2s ease;
+  }
+
+  .lang-dropdown[open] .caret {
+    transform: rotate(180deg);
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 0.25rem);
+    right: 0;
+    margin: 0;
+    background-color: var(--sl-color-bg-nav);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.5rem;
+    padding: 0.25rem;
+    list-style: none;
+    min-width: 170px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    z-index: 100;
+  }
+
+  :global([data-theme='dark']) .lang-menu {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  }
+
+  .lang-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .lang-menu a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.45rem 0.75rem;
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-size: var(--sl-text-sm);
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .lang-menu a:hover {
+    background-color: rgba(2, 132, 199, 0.05);
+    color: var(--sl-color-white);
+  }
+
+  :global([data-theme='dark']) .lang-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .lang-menu a.active {
+    background-color: var(--sl-color-accent-low);
+    color: var(--sl-color-accent);
+    font-weight: 600;
+  }
+
+  .flag-icon {
+    width: 22px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 2px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+  }
+</style>
+
+<script>
+  // Đóng dropdown khi click bên ngoài
+  document.addEventListener('click', (e) => {
+    const dropdowns = document.querySelectorAll('.lang-dropdown');
+    dropdowns.forEach(dropdown => {
+      if (!dropdown.contains(e.target as Node)) {
+        dropdown.removeAttribute('open');
+      }
+    });
+  });
+</script>

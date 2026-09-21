@@ -1,0 +1,70 @@
+---
+title: Tối ưu hóa & Chẩn đoán Mạng (Network)
+description: Tra cứu thông số mạng thời gian thực, chuyển đổi DNS Cloudflare/Google, sửa lỗi Wi-Fi và đo độ trễ Ping.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/network/network-01.png" 
+  alt="Giao diện tab Mạng (Network)"
+/>
+
+## 2. Tổng quan về phân hệ
+
+Tab **Mạng (Network)** cung cấp một bộ công cụ toàn diện để theo dõi tình trạng kết nối, tối ưu hóa tốc độ truy cập internet và chẩn đoán độ trễ (*ping*). Đây là khu vực cực kỳ quan trọng đối với game thủ cần đường truyền ổn định và kỹ thuật viên IT cần tra cứu thông số mạng nhanh.
+
+---
+
+## 3. Các thành phần chính của phân hệ Mạng
+
+### Thông tin mạng thời gian thực (Network Information)
+Bảng điều khiển bên phải cung cấp cái nhìn chi tiết và trực quan về kết nối mạng hiện tại:
+* **Status & Internet Access:** Kiểm tra nhanh xem máy tính đã kết nối internet thành công hay chưa.
+* **Network Name (SSID) & Signal Strength:** Hiển thị tên mạng Wi-Fi và cường độ tín hiệu thực tế (Ví dụ: `92%`).
+* **Connection Details:** Cho biết loại kết nối (*Wi-Fi / Ethernet*), băng tần đang dùng (*2.4 GHz / 5 GHz*) và băng thông tối đa (*Link Speed*).
+* **Data Usage:** Theo dõi lượng dữ liệu đã tải lên (*Upload*) và tải về (*Download*) trong phiên làm việc hiện tại.
+* **Technical IP Info:** Hiển thị chi tiết IPv4, Subnet Mask, Gateway, DHCP Server và địa chỉ MAC vật lý.
+
+### Quản lý DNS (DNS Management)
+Tăng tốc độ phân giải tên miền và vượt qua các trang web bị chặn:
+* **Select Network Adapter:** Cho phép bạn chọn chính xác card mạng cần cấu hình (Ví dụ: *Intel Wi-Fi 6 AX201*).
+* **DNS Provider:** Lựa chọn nhanh các nhà cung cấp DNS hàng đầu thế giới: **Cloudflare (1.1.1.1)** hoặc **Google (8.8.8.8)**.
+* **Flush DNS Cache:** Xóa sạch bộ nhớ đệm DNS để khắc phục ngay các lỗi không truy cập được trang web do bản ghi cũ hoặc bị lỗi.
+* **Set DNS:** Áp dụng cấu hình DNS mới chỉ với một cú nhấp chuột mà không cần mở Control Panel phức tạp.
+
+### Tinh chỉnh tối ưu mạng (Network Optimization)
+* **Optimize Network:** Tự động điều chỉnh các thông số hệ thống để ưu tiên băng thông và giảm thiểu tình trạng nghẽn mạng.
+* **Disable Wifi Sense:** Tắt tính năng tự động chia sẻ mật khẩu Wi-Fi của Windows để tăng cường bảo mật.
+* **Fix Wi-Fi automatically hidden:** Sửa lỗi Wi-Fi thường xuyên bị ẩn hoặc tự động ngắt kết nối không rõ nguyên nhân.
+
+### Kiểm tra độ trễ (Ping IP to check network latency)
+* **Ping Tool:** Nhập địa chỉ IP hoặc tên miền (Ví dụ: `google.com` hoặc server game) để đo độ trễ (*ms*) và tỷ lệ mất gói (*Packet Loss*).
+* **Export:** Xuất kết quả kiểm tra ra tệp tin để lưu trữ hoặc gửi cho bộ phận kỹ thuật phân tích.
+
+---
+
+## 4. Giá trị thực tế cho từng đối tượng
+
+* **Đối với Gamer:** 
+  * Giảm Ping tối đa: Dùng tính năng *Set DNS sang Cloudflare* kết hợp với *Optimize Network* để đạt độ trễ thấp nhất trong game online.
+  * Theo dõi tín hiệu Wi-Fi và ưu tiên băng tần 5 GHz để tránh hiện tượng giật lag (*spike*).
+* **Đối với IT Support & Helpdesk:**
+  * Chẩn đoán nhanh thông số mạng (IP, Gateway, MAC) mà không cần mở CMD gõ lệnh `ipconfig`.
+  * Xử lý sự cố từ xa nhanh chóng với nút *Flush DNS Cache* và *Fix Wi-Fi*.
+  * Xuất báo cáo Ping chuyên nghiệp cho khách hàng.
+
+---
+
+## 5. Hướng dẫn sử dụng
+
+<Steps>
+1. Mở HyperLis, chọn tab **Mạng (Network)**.
+2. Chọn card mạng trong danh sách *Select Network Adapter*.
+3. Chọn DNS Provider mong muốn (khuyến nghị **Cloudflare**) và nhấn **Set DNS**.
+4. Nhấn **Flush DNS Cache** và bật **Optimize Network**.
+5. Nhập địa chỉ máy chủ vào ô Ping IP và nhấn **Ping** để kiểm tra độ trễ.
+</Steps>

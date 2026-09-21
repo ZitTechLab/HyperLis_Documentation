@@ -1,0 +1,87 @@
+---
+title: Chơi game
+description: Tối ưu hóa trải nghiệm gaming, kích hoạt Game Mode, tắt Game Bar, dịch vụ Xbox Live và tắt gia tốc chuột.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Bật chế độ chơi game (Game Mode)
+
+Bật Game Mode của Windows để cải thiện hiệu suất gaming:
+* Ưu tiên tài nguyên CPU và GPU cho game đang chạy
+* Giảm sự can thiệp của tác vụ nền trong khi chơi game
+* Hoạt động tốt nhất với game DirectX
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers`
+  * `HwSchMode` = `2` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\GameBar`
+  * `AllowAutoGameMode` = `1` (REG_DWORD)
+  * `AutoGameModeEnabled` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\System\GameConfigStore`
+  * `GameDVR_FSEBehaviorMode` = `2` (REG_DWORD)
+
+## 3. Tắt Game Bar
+
+Tắt lớp phủ Xbox Game Bar (Win+G):
+* Xóa lớp phủ xuất hiện khi chơi game
+* Giảm sử dụng tài nguyên nền từ GameDVR
+* Được khuyến nghị nếu bạn dùng công cụ quay màn hình khác (OBS, v.v.)
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\GameDVR`
+  * `AppCaptureEnabled` = `0` (REG_DWORD)
+  * `AudioCaptureEnabled` = `0` (REG_DWORD)
+  * `CursorCaptureEnabled` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\GameBar`
+  * `UseNexusForGameBarEnabled` = `0` (REG_DWORD)
+  * `ShowStartupPanel` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\System\GameConfigStore`
+  * `GameDVR_Enabled` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\GameDVR`
+  * `AllowGameDVR` = `0` (REG_DWORD)
+
+## 4. Tắt Xbox Live
+
+Tắt các dịch vụ liên quan đến Xbox Live chạy nền:
+* Dừng các dịch vụ: XblAuthManager, XblGameSave, XboxGipSvc
+* Giảm sử dụng CPU và bộ nhớ khi không làm gì
+* Được khuyến nghị cho người dùng không dùng Xbox
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxNetApiSvc`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblAuthManager`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XblGameSave`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\XboxGipSvc`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\xbgm`
+  * `Start` = `4` (REG_DWORD)
+
+## 5. Tắt gia tốc chuột
+
+Tắt tăng tốc con trỏ chuột (Enhance Pointer Precision):
+* Làm cho chuyển động chuột 1:1 với chuyển động vật lý
+* Thiết yếu cho game thủ thi đấu (FPS, RTS)
+* Cải thiện bộ nhớ cơ bắp và độ chính xác khi nhắm
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Control Panel\Mouse`
+  * `MouseSpeed` = `"0"` (REG_SZ)
+  * `MouseThreshold1` = `"0"` (REG_SZ)
+  * `MouseThreshold2` = `"0"` (REG_SZ)

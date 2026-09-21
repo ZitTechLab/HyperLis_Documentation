@@ -1,0 +1,35 @@
+---
+title: DNS Management
+description: Quản lý máy chủ DNS, chuyển đổi nhanh giữa Cloudflare, Google, Quad9 và xóa bộ đệm DNS.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/network/network-01.png" 
+  alt="Giao diện tab Mạng (Network)"
+/>
+
+## 2. Tổng quan
+
+Module **DNS Management** cho phép bạn thay đổi máy chủ phân giải tên miền (DNS Server) cho toàn bộ card mạng hoặc từng adapter cụ thể chỉ bằng 1 cú nhấp chuột, đồng thời tích hợp nút làm mới bộ nhớ đệm **Flush DNS Cache**.
+
+## 3. Hướng dẫn đổi DNS
+
+<Steps>
+1. Mở HyperLis, chọn tab **Mạng (Network) > DNS Management**.
+2. Chọn Preset máy chủ DNS mong muốn:
+   * **Cloudflare (1.1.1.1 / 1.0.0.1)** — Ưu tiên tốc độ và độ trễ thấp.
+   * **Google DNS (8.8.8.8 / 8.8.4.4)** — Ổn định và phổ biến toàn cầu.
+   * **Quad9 (9.9.9.9 / 149.112.112.112)** — Tăng cường bảo mật và chặn phần mềm độc hại.
+   * **Custom DNS** — Nhập địa chỉ DNS tùy chọn của bạn.
+3. Nhấn **Apply DNS**.
+4. Nhấn **Flush DNS Cache** để xóa sạch các bản ghi phân giải cũ.
+</Steps>
+
+<Aside type="note">
+Nếu muốn quay về DNS tự động do modem mạng cấp qua DHCP, chỉ cần chọn chế độ **Automatic (DHCP)** và nhấn **Apply**.
+</Aside>

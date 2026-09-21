@@ -1,0 +1,93 @@
+---
+title: Quản lý bản quyền
+description: Quản lý toàn diện trạng thái bản quyền hệ điều hành Windows, tra cứu khóa gốc BIOS, kích hoạt, sao lưu và khôi phục bản quyền.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/manage-license/license-01.png" 
+  alt="Giao diện tab QL Bản quyền (Manage License) - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/manage-license/license-02.png" 
+  alt="Giao diện tab QL Bản quyền (Manage License) - Ảnh 2"
+/>
+
+## 2. Trạng thái kích hoạt hệ thống
+
+Khu vực hiển thị tổng quan tình trạng giấy phép sử dụng của Windows trên máy tính hiện tại.
+
+### Thẻ trạng thái & Phương thức bản quyền
+* Thẻ lớn phía trên cung cấp trạng thái trực quan với biểu tượng màu sắc rõ ràng:
+  * **Đã kích hoạt:** Hệ điều hành đang chạy với giấy phép hợp lệ.
+  * **Chưa kích hoạt:** Hệ thống chưa được cấp phép hoặc khóa kích hoạt đã hết hạn.
+  * **Cảnh báo bản quyền / Không khớp bản quyền gốc:** Phát hiện máy tính đang sử dụng giấy phép kích hoạt ảo hoặc phiên bản Windows cài đặt không trùng khớp với giấy phép nhà sản xuất gốc đi kèm máy.
+* Bốn ô thông số nhanh:
+  * **Trạng thái:** Tình trạng cấp phép hiện tại (Đã kích hoạt / Chưa kích hoạt).
+  * **Phương thức:** Kênh kích hoạt (Bản quyền số, Giấy phép nhà sản xuất OEM, Khóa kích hoạt theo lô KMS/KMS38).
+  * **Ngày kích hoạt:** Thời gian thiết bị ghi nhận bản quyền hoặc ngày cài đặt hệ điều hành.
+  * **Tình trạng:** Kết quả xác thực tính hợp lệ từ máy chủ cấp phép Microsoft (Hợp lệ / Không hợp lệ).
+
+### Nhận diện cảnh báo không khớp bản quyền
+Hệ thống tự động đọc bảng thông số phần cứng trong BIOS/UEFI để phát hiện các tình huống xung đột:
+* **Không khớp phiên bản:** Máy tính có khóa gốc của nhà sản xuất nhưng hệ thống đang cài đặt phiên bản khác kích hoạt qua công cụ bên thứ ba (Ví dụ máy tính có khóa gốc của nhà sản xuất dành cho bản Home nhưng hệ thống đang cài đặt bản Pro).
+* **Kích hoạt KMS38:** Giấy phép kích hoạt qua phương thức giả lập máy chủ nội bộ với hạn sử dụng tới năm 2038.
+* **Kích hoạt qua máy chủ KMS ngoài:** Hệ thống liên kết tới địa chỉ máy chủ kích hoạt định kỳ của bên thứ ba.
+
+### Kiểm tra lại trạng thái
+* Nút: **Kiểm tra lại trạng thái**
+* Công dụng: Quét lại toàn bộ các dịch vụ bảo vệ bản quyền phần mềm và giao diện cấp phép của Windows để làm mới thông tin bản quyền.
+
+## 3. Thông tin bản quyền chi tiết
+
+### Bảng thông số hệ điều hành và khóa cấp phép
+* **Kênh phân phối:** Kênh cấp phép của phiên bản Windows hiện tại (OEM, Bán lẻ Retail, Doanh nghiệp Volume MAK/GVLK).
+* **Hệ điều hành:** Tên chính xác của hệ điều hành đang vận hành (Ví dụ: Windows 11 Pro, Windows 10 Home).
+* **Mã CID:** Định danh duy nhất của sản phẩm Windows được cấp phép trên thiết bị này. Bên cạnh có nút sao chép nhanh mã CID vào bộ nhớ tạm.
+* **Phiên bản:** Mã hiệu phiên bản Windows đang chạy (Ví dụ: 23H2, 24H2).
+* **Khóa sản phẩm:** 5 ký tự đuôi của khóa sản phẩm đang cài đặt trên máy. Bên cạnh có nút sao chép nhanh mã khóa.
+* **Bản dựng:** Số bản dựng chi tiết của hệ điều hành (Ví dụ: 26100.2605).
+* **Khóa OEM:** Khóa bản quyền gốc của nhà sản xuất được nhúng trực tiếp trong vi mạch BIOS/UEFI. Bên cạnh có nút sao chép nhanh mã khóa gốc.
+* **Kiến trúc:** Nền tảng vi xử lý của hệ điều hành (64-bit hoặc 32-bit).
+* **Phiên bản OEM:** Tên phiên bản Windows được chứng nhận theo khóa bản quyền gốc đi kèm máy.
+* **Ngày cài đặt:** Thời điểm hoàn tất cài đặt hệ điều hành vào ổ đĩa.
+
+### Sao chép thông tin
+* **Sao chép tất cả thông tin** vào bộ nhớ tạm (Clipboard), thuận tiện cho việc lưu trữ, gửi hỗ trợ kỹ thuật hoặc kiểm tra bảo hành.
+
+## 4. Kích hoạt Windows
+
+### Nhập khóa sản phẩm và kích hoạt trực tuyến
+* Trường nhập khóa sản phẩm: Ô nhập chuỗi ký tự bản quyền gồm 25 ký tự dạng `XXXXX-XXXXX-XXXXX-XXXXX-XXXXX`.
+* Nhấn **Kích hoạt** để kích hoạt hệ thống với thông tin khóa bản quyền đã nhập.
+
+### Kiểm tra trạng thái kích hoạt
+* Nhấn **Kiểm tra trạng thái** để đọc trạng thái cấp phép chi tiết từ hệ thống và mở hộp thoại thông báo toàn bộ thông tin về kênh cấp phép, trạng thái và hạn sử dụng của bản quyền.
+
+### Chuyển đổi phiên bản hệ điều hành
+* Khi nhấp vào nút **Bấm vào đây** hệ thống điều hướng trực tiếp sang tab **Đổi phiên bản** để người dùng có thể nâng cấp hoặc hạ cấp hệ điều hành (chẳng hạn nâng cấp từ Home lên Pro hoặc chuyển đổi sang bản doanh nghiệp LTSC) trước khi nạp khóa bản quyền tương ứng.
+
+## 5. Sao lưu & Khôi phục bản quyền
+
+Công cụ lưu trữ an toàn chứng chỉ số của thiết bị, cho phép khôi phục lại bản quyền sau khi cài lại hệ điều hành.
+
+* Nhấn nút **Sao lưu** để lưu lại thông tin bản quyền hiện tại thành một file để sử dụng khi cần.
+* Nhấn nút **Khôi phục** để khôi phục bản quyền từ file đã sao lưu trước đó.
+
+## 6. Loại bỏ MAS (Crack)
+
+Gỡ bỏ triệt để các script kích hoạt từ bên thứ ba (các phương thức kích hoạt giả lập, công cụ kích hoạt tự động), đưa hệ thống về trạng thái sạch để chuẩn bị kích hoạt bản quyền chuẩn hoặc quay về khóa gốc của nhà sản xuất.
+
+### Lưu ý an toàn khi gỡ bỏ kích hoạt
+* Việc gỡ bỏ các công cụ kích hoạt có thể làm ảnh hưởng tạm thời đến nhận diện khóa bản quyền nhà sản xuất gốc.
+* Sau khi thực hiện gỡ bỏ, khuyến nghị khởi động lại máy tính, kiểm tra lại trạng thái trong tab quản lý bản quyền và nạp lại khóa hợp lệ nếu cần.
+
+## 7. Hướng dẫn & Hỗ trợ
+
+* Nhấn **Hướng dẫn kích hoạt** để mở tài liệu hướng dẫn kích hoạt chính thức từ trang web hỗ trợ của Microsoft.
+* Nhấn **Liên hệ hỗ trợ** để mở trực tiếp trang hỗ trợ kỹ thuật Zịt's Tech Lab trên Facebook để nhận trợ giúp trực tiếp khi gặp sự cố bản quyền.

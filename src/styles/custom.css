@@ -1,0 +1,707 @@
+/* HyperLis Documentation - Tailwind CSS Docs Inspired Theme */
+
+:root {
+  /* Typography */
+  --sl-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --sl-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Brand Accent Tokens (Hyper Blue) */
+  --sl-color-accent-low: #e0f2fe;
+  --sl-color-accent: #0284c7;
+  --sl-color-accent-high: #0369a1;
+
+  /* Light Theme (Clean slate, crisp contrast) */
+  --sl-color-white: #0f172a;
+  --sl-color-gray-1: #1e293b;
+  --sl-color-gray-2: #334155;
+  --sl-color-gray-3: #64748b;
+  --sl-color-gray-4: #94a3b8;
+  --sl-color-gray-5: #cbd5e1;
+  --sl-color-gray-6: #e2e8f0;
+  --sl-color-gray-7: #f1f5f9;
+  --sl-color-black: #ffffff;
+
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #fafafa;
+  --sl-color-bg-inline-code: #f1f5f9;
+  --sl-color-hairline: #e2e8f0;
+  --sl-color-hairline-light: #f1f5f9;
+
+  /* Shadows */
+  --hl-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --hl-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+}
+
+:root[data-theme='dark'] {
+  /* Dark Theme (Deep slate, neutral dark) */
+  --sl-color-accent-low: #082f49;
+  --sl-color-accent: #38bdf8;
+  --sl-color-accent-high: #7dd3fc;
+
+  --sl-color-white: #f8fafc;
+  --sl-color-gray-1: #f1f5f9;
+  --sl-color-gray-2: #e2e8f0;
+  --sl-color-gray-3: #cbd5e1;
+  --sl-color-gray-4: #94a3b8;
+  --sl-color-gray-5: #475569;
+  --sl-color-gray-6: #334155;
+  --sl-color-gray-7: #1e293b;
+  --sl-color-black: #0b0f19;
+
+  --sl-color-bg: #0b0f19;
+  --sl-color-bg-nav: #0b0f19;
+  --sl-color-bg-sidebar: #0f172a;
+  --sl-color-bg-inline-code: #1e293b;
+  --sl-color-hairline: #1e293b;
+  --sl-color-hairline-light: #172033;
+
+  --hl-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --hl-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+}
+
+/* Global Reset & Base Enhancements */
+html {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--sl-font);
+  color: var(--sl-color-gray-2);
+  line-height: 1.7;
+}
+
+/* Header & Navigation Bar Styling */
+header.header {
+  border-bottom: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-nav);
+  backdrop-filter: blur(8px);
+  height: 4rem;
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--sl-color-white);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Sidebar Styling - Astro Starlight Official Theme */
+nav.sidebar {
+  border-right: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-sidebar);
+}
+
+.sidebar-pane {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+.sidebar-content .top-level>li {
+  margin-top: 0.65rem;
+}
+
+.sidebar-content .top-level>li:first-child {
+  margin-top: 0.25rem;
+}
+
+.sidebar-content summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 0.375rem;
+  transition: background-color 0.15s ease;
+}
+
+.sidebar-content summary:hover {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+:root:not([data-theme='dark']) .sidebar-content summary:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-content .group-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  text-transform: none !important;
+}
+
+.sidebar-content .group-label span.large,
+.sidebar-content summary .large {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: none !important;
+  letter-spacing: -0.01em;
+  color: var(--sl-color-white);
+  line-height: 1.4;
+}
+
+.sidebar-content summary .caret {
+  color: var(--sl-color-gray-3);
+  transition: transform 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.sidebar-content details[open]>summary .caret {
+  transform: rotateZ(90deg);
+}
+
+/* Nested sublist & vertical guide line */
+.sidebar-content ul ul {
+  margin-top: 0.35rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-content ul ul li {
+  margin-inline-start: 0.5rem;
+  border-inline-start: 1px solid var(--sl-color-hairline);
+  padding-inline-start: 0.5rem;
+}
+
+:root[data-theme='dark'] .sidebar-content ul ul li {
+  border-inline-start: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar-content a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.375rem;
+  color: var(--sl-color-gray-3);
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+  display: block;
+  line-height: 1.4;
+}
+
+:root[data-theme='dark'] .sidebar-content a {
+  color: var(--sl-color-gray-2);
+}
+
+.sidebar-content a:hover {
+  color: var(--sl-color-white);
+  background-color: var(--sl-color-gray-7);
+}
+
+:root[data-theme='dark'] .sidebar-content a:hover {
+  color: var(--sl-color-white);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Active Page Pill - Restored Hyper Blue Palette */
+.sidebar-content a[aria-current='page'] {
+  color: var(--sl-color-accent) !important;
+  background-color: var(--sl-color-accent-low) !important;
+  font-weight: 600;
+}
+
+:root[data-theme='dark'] .sidebar-content a[aria-current='page'] {
+  color: #38bdf8 !important;
+  background-color: rgba(56, 189, 248, 0.12) !important;
+  font-weight: 600;
+}
+
+/* Content Area & Typography */
+.content-panel {
+  max-width: 52rem;
+  margin: 0 auto;
+}
+
+.sl-markdown-content h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: var(--sl-color-white);
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.sl-markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--sl-color-white);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+.sl-markdown-content h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--sl-color-white);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.sl-markdown-content p {
+  margin-bottom: 1.25rem;
+  color: var(--sl-color-gray-2);
+}
+
+.sl-markdown-content strong {
+  font-weight: 600;
+  color: var(--sl-color-white);
+}
+
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.4rem;
+  color: var(--sl-color-gray-2);
+}
+
+.sl-markdown-content li::marker {
+  color: var(--sl-color-gray-4);
+}
+
+/* Tables - Modern & Spacious Styling */
+.sl-markdown-content table:not(:where(.not-content *)),
+.sl-markdown-content table {
+  display: table !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 2rem 0 !important;
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  border: 1px solid var(--sl-color-hairline) !important;
+  border-radius: 0.625rem !important;
+  overflow: hidden !important;
+  box-shadow: var(--hl-shadow-sm) !important;
+  background-color: var(--sl-color-bg-sidebar) !important;
+}
+
+/* Header Cells (th) */
+.sl-markdown-content th:not(:where(.not-content *)),
+.sl-markdown-content th {
+  background-color: var(--sl-color-gray-7) !important;
+  color: var(--sl-color-white) !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.02em !important;
+  text-align: left !important;
+  padding: 0.95rem 1.25rem !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+:root[data-theme='dark'] .sl-markdown-content th:not(:where(.not-content *)),
+:root[data-theme='dark'] .sl-markdown-content th {
+  background-color: rgba(30, 41, 59, 0.75) !important;
+}
+
+/* Generous Left & Right Margin Padding from Table Edges */
+.sl-markdown-content th:first-child,
+.sl-markdown-content td:first-child {
+  padding-left: 1.65rem !important;
+  /* Khoảng cách rộng rãi từ rìa trái bảng tới cột đầu tiên */
+}
+
+.sl-markdown-content th:last-child,
+.sl-markdown-content td:last-child {
+  padding-right: 1.65rem !important;
+  /* Khoảng cách rộng rãi từ cột cuối cùng tới rìa phải bảng */
+}
+
+/* Data Cells (td) */
+.sl-markdown-content td:not(:where(.not-content *)),
+.sl-markdown-content td {
+  padding: 0.9rem 1.25rem !important;
+  border-bottom: 1px solid var(--sl-color-hairline) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  color: var(--sl-color-gray-2) !important;
+  vertical-align: middle !important;
+  transition: background-color 0.15s ease;
+}
+
+/* Last Row has no bottom border */
+.sl-markdown-content tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Row Zebra Striping & Hover */
+.sl-markdown-content tr:nth-child(even) td {
+  background-color: rgba(0, 0, 0, 0.015) !important;
+}
+
+:root[data-theme='dark'] .sl-markdown-content tr:nth-child(even) td {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+.sl-markdown-content tbody tr:hover td {
+  background-color: rgba(2, 132, 199, 0.04) !important;
+}
+
+:root[data-theme='dark'] .sl-markdown-content tbody tr:hover td {
+  background-color: rgba(56, 189, 248, 0.05) !important;
+}
+
+/* Balanced Column Proportions */
+.sl-markdown-content table {
+  table-layout: auto !important;
+}
+
+/* 2-column tables */
+.sl-markdown-content table th:first-child:nth-last-child(2),
+.sl-markdown-content table td:first-child:nth-last-child(2) {
+  width: 32%;
+  min-width: 180px;
+}
+
+/* 3-column tables */
+.sl-markdown-content table th:first-child:nth-last-child(3),
+.sl-markdown-content table td:first-child:nth-last-child(3) {
+  width: 25%;
+  min-width: 140px;
+}
+
+.sl-markdown-content table th:nth-child(2):nth-last-child(2),
+.sl-markdown-content table td:nth-child(2):nth-last-child(2) {
+  width: 30%;
+  min-width: 160px;
+}
+
+/* 4-column tables */
+.sl-markdown-content table th:first-child:nth-last-child(4),
+.sl-markdown-content table td:first-child:nth-last-child(4) {
+  width: 22%;
+  min-width: 140px;
+}
+
+/* Asides / Callouts */
+.sl-markdown-content .starlight-aside {
+  border-radius: 0.5rem;
+  border-left-width: 4px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  box-shadow: var(--hl-shadow-sm);
+}
+
+/* Code Blocks */
+.sl-markdown-content code:not(pre code) {
+  font-family: var(--sl-font-mono);
+  font-size: 0.85em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  background-color: var(--sl-color-bg-inline-code);
+  border: 1px solid var(--sl-color-hairline);
+  color: var(--sl-color-accent);
+}
+
+:root[data-theme='dark'] .sl-markdown-content code:not(pre code) {
+  color: #7dd3fc;
+}
+
+.expressive-code {
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--hl-shadow-md);
+  border: 1px solid var(--sl-color-hairline);
+}
+
+/* Custom UI Components Styling */
+.hl-screenshot-container {
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-sidebar);
+  overflow: hidden;
+  box-shadow: var(--hl-shadow-md);
+}
+
+.hl-screenshot-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1rem;
+  background-color: var(--sl-color-gray-7);
+  border-bottom: 1px solid var(--sl-color-hairline);
+}
+
+.hl-screenshot-dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background-color: var(--sl-color-gray-4);
+  display: inline-block;
+}
+
+.hl-screenshot-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--sl-color-gray-3);
+  margin-left: 0.5rem;
+}
+
+.hl-screenshot-body {
+  padding: 0;
+  background-color: var(--sl-color-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hl-screenshot-body img,
+.hl-screenshot-body svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hl-screenshot-caption {
+  padding: 0.6rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--sl-color-gray-3);
+  text-align: center;
+  background-color: var(--sl-color-gray-7);
+  border-top: 1px solid var(--sl-color-hairline);
+}
+
+/* Placeholder Box Component */
+.hl-placeholder-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  background-color: rgba(2, 132, 199, 0.05);
+  border: 1px dashed #0284c7;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+:root[data-theme='dark'] .hl-placeholder-notice {
+  background-color: rgba(56, 189, 248, 0.07);
+  border-color: #38bdf8;
+}
+
+.hl-placeholder-notice .icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: var(--sl-color-accent);
+}
+
+.hl-placeholder-notice .title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--sl-color-white);
+  margin-bottom: 0.25rem;
+}
+
+.hl-placeholder-notice .desc {
+  font-size: 0.85rem;
+  color: var(--sl-color-gray-3);
+  margin: 0;
+}
+
+/* Before / After Component */
+.hl-before-after {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.hl-before-card,
+.hl-after-card {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--sl-color-hairline);
+  background-color: var(--sl-color-bg-sidebar);
+}
+
+.hl-before-card .badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #fee2e2;
+  color: #991b1b;
+  margin-bottom: 0.75rem;
+}
+
+:root[data-theme='dark'] .hl-before-card .badge {
+  background-color: #450a0a;
+  color: #fca5a5;
+}
+
+.hl-after-card .badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: #dcfce7;
+  color: #166534;
+  margin-bottom: 0.75rem;
+}
+
+:root[data-theme='dark'] .hl-after-card .badge {
+  background-color: #052e16;
+  color: #86efac;
+}
+
+/* Search Modal and Pagefind */
+.pagefind-ui {
+  --pagefind-ui-primary: var(--sl-color-accent);
+  --pagefind-ui-text: var(--sl-color-gray-2);
+  --pagefind-ui-background: var(--sl-color-bg);
+  --pagefind-ui-border: var(--sl-color-hairline);
+  --pagefind-ui-font: var(--sl-font);
+}
+
+/* Smooth Table of Contents */
+.right-sidebar-panel {
+  border-left: 1px solid var(--sl-color-hairline);
+}
+
+starlight-toc a {
+  font-size: 0.8125rem;
+  color: var(--sl-color-gray-3);
+  transition: color 0.15s ease;
+}
+
+starlight-toc a:hover {
+  color: var(--sl-color-white);
+}
+
+starlight-toc a[aria-current='true'] {
+  color: var(--sl-color-accent);
+  font-weight: 600;
+}
+
+/* Landing / Splash / 404 Full-Width Reset & Remove Top Default Title */
+:root:has(.hero-landing-wrapper) .main-frame,
+body:has(.hero-landing-wrapper) .main-frame,
+:root:has(.not-found-wrapper) .main-frame,
+body:has(.not-found-wrapper) .main-frame,
+:root:has(.hero-landing-wrapper) .main-pane,
+body:has(.hero-landing-wrapper) .main-pane,
+:root:has(.not-found-wrapper) .main-pane,
+body:has(.not-found-wrapper) .main-pane,
+:root:has(.not-found-wrapper) main,
+body:has(.not-found-wrapper) main,
+:root:has(.hero-landing-wrapper) .lg\:sl-flex,
+body:has(.hero-landing-wrapper) .lg\:sl-flex,
+:root:has(.not-found-wrapper) .lg\:sl-flex,
+body:has(.not-found-wrapper) .lg\:sl-flex,
+[data-template='splash'] .main-frame,
+[data-has-hero] .main-frame {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:root:has(.hero-landing-wrapper) .content-panel,
+body:has(.hero-landing-wrapper) .content-panel,
+:root:has(.not-found-wrapper) .content-panel,
+body:has(.not-found-wrapper) .content-panel,
+[data-template='splash'] .content-panel,
+[data-has-hero] .content-panel {
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Hide default Starlight H1 title and default hero on splash pages (landing and 404) */
+[data-template='splash'] .content-panel:first-child,
+[data-template='splash'] h1#_top,
+:root:has(.hero-landing-wrapper) .content-panel:first-child,
+body:has(.hero-landing-wrapper) .content-panel:first-child,
+:root:has(.not-found-wrapper) .content-panel:first-child,
+body:has(.not-found-wrapper) .content-panel:first-child,
+:root:has(.hero-landing-wrapper) h1#_top,
+body:has(.hero-landing-wrapper) h1#_top,
+:root:has(.not-found-wrapper) h1#_top,
+body:has(.not-found-wrapper) h1#_top,
+:root:has(.hero-landing-wrapper) .hero,
+body:has(.hero-landing-wrapper) .hero,
+:root:has(.not-found-wrapper) .hero,
+body:has(.not-found-wrapper) .hero {
+  display: none !important;
+}
+
+:root:has(.hero-landing-wrapper) .sl-container,
+body:has(.hero-landing-wrapper) .sl-container,
+:root:has(.not-found-wrapper) .sl-container,
+body:has(.not-found-wrapper) .sl-container,
+[data-template='splash'] .sl-container,
+[data-has-hero] .sl-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:root:has(.hero-landing-wrapper) .sl-markdown-content,
+body:has(.hero-landing-wrapper) .sl-markdown-content,
+:root:has(.not-found-wrapper) .sl-markdown-content,
+body:has(.not-found-wrapper) .sl-markdown-content,
+[data-template='splash'] .sl-markdown-content,
+[data-has-hero] .sl-markdown-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+:root:has(.hero-landing-wrapper) .content-panel>footer,
+body:has(.hero-landing-wrapper) .content-panel>footer,
+:root:has(.not-found-wrapper) footer,
+body:has(.not-found-wrapper) footer,
+:root:has(.hero-landing-wrapper) .pagination-links,
+body:has(.hero-landing-wrapper) .pagination-links,
+:root:has(.not-found-wrapper) .pagination-links,
+body:has(.not-found-wrapper) .pagination-links,
+[data-template='splash'] footer.sl-flex,
+[data-template='splash'] .content-panel>footer,
+body:has(.landing-custom-footer) footer.sl-flex,
+:root:has(.landing-custom-footer) footer.sl-flex,
+body:has(.wu-hero) footer.sl-flex,
+:root:has(.wu-hero) footer.sl-flex {
+  display: none !important;
+}
+
+@media (min-width: 861px) {
+  html:has(.not-found-wrapper),
+  body:has(.not-found-wrapper) {
+    overflow: hidden !important;
+    height: 100% !important;
+    max-height: 100vh !important;
+  }
+}
+/* Fix Language Selector Width */
+starlight-lang-select label {
+  --sl-select-width: 10.5em !important;
+}

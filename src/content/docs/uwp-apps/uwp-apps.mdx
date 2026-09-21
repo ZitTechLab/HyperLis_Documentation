@@ -1,0 +1,66 @@
+---
+title: Ứng dụng UWP
+description: Gỡ bỏ các ứng dụng Microsoft cài sẵn và bloatware không cần thiết để giải phóng dung lượng và tối ưu hiệu suất.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/uwp-apps/uwp-apps-01.png" 
+  alt="Giao diện tab Ứng dụng UWP (UWP Apps)"
+/>
+
+## 2. Bloatware Removal
+
+Tính năng Gỡ bỏ Bloatware cho phép bạn dễ dàng dọn dẹp các ứng dụng Microsoft cài sẵn và bloatware không cần thiết chỉ với một cú nhấp chuột, hoặc tự do tùy chỉnh danh sách theo nhu cầu. Các tệp cá nhân và cài đặt hệ thống cốt lõi của bạn sẽ được giữ nguyên an toàn tuyệt đối.
+
+## 3. Chọn cấu hình gỡ bỏ
+
+### An toàn
+* **Số lượng**: 23 ứng dụng.
+* **Đánh giá**: Khuyên dùng cho người mới.
+* **Mô tả**: Gỡ bỏ các ứng dụng không cần thiết trong khi vẫn giữ lại các tính năng cốt lõi của Microsoft và Windows.
+* **Phạm vi gỡ bỏ**: Gỡ các ứng dụng phụ trợ cài sẵn như 3D Viewer, Bing Search, Clipchamp, Clock, Cortana, Dev Home, Family, Feedback Hub, Get Help, Mail and Calendar, Bing News, Office 365, OneNote, Outlook for Windows, People, Power Automate, Skype, Solitaire Collection, Tips, To Do, Weather, Phone Link, Mixed Reality Portal, Steps Recorder.
+
+### Đề xuất
+* **Số lượng**: 58 ứng dụng.
+* **Đánh giá**: Cân bằng tốt nhất.
+* **Mô tả**: Gỡ bỏ hầu hết các phần mềm rác và ứng dụng không cần thiết để cân bằng tốt nhất giữa hiệu suất và độ ổn định.
+* **Phạm vi gỡ bỏ**: Bao gồm toàn bộ danh sách An toàn cùng các ứng dụng giải trí và dịch vụ bổ sung như Maps, Movies & TV, Voice Recorder, Media Player, Sticky Notes, Teams, các dịch vụ Xbox (Xbox App, Game Bar, Overlay, Live), OneDrive, Microsoft Edge, Copilot Provider.
+
+### Mạnh mẽ
+* **Số lượng**: 84 ứng dụng.
+* **Đánh giá**: Hiệu năng tối đa.
+* **Mô tả**: Gỡ bỏ gần như toàn bộ các ứng dụng không cần thiết để tối đa hóa hiệu suất và giảm tối đa tiến trình chạy ngầm.
+* **Phạm vi gỡ bỏ**: Gỡ bỏ triệt để toàn bộ ứng dụng người dùng không thiết yếu nhằm tối ưu hóa bộ nhớ RAM, giảm thiểu các tiến trình nền và giải phóng dung lượng đĩa tối đa.
+
+## 4. Gỡ bỏ tùy chỉnh
+
+Bạn có thể tùy chỉnh danh sách ứng dụng trong bất kỳ nhóm nào trước khi gỡ bằng cách nhấn vào nút **Tùy chỉnh**, tick chọn các ứng dụng cần gỡ và cuối cùng nhấn vào nút **Bắt đầu** để tiến hành gỡ bỏ hàng loạt.
+
+* **Tìm kiếm ứng dụng**: Sử dụng ô tìm kiếm để lọc nhanh ứng dụng theo tên hoặc gói cài đặt.
+* **Chọn tất cả**: Tính năng cho phép chọn nhanh hoặc bỏ chọn toàn bộ ứng dụng trong danh sách.
+* **Chế độ chuyên gia (Expert Mode)**: Cho phép mở khóa để gỡ bỏ các ứng dụng hệ thống nâng cao (cần cân nhắc trước khi gỡ).
+* **Dung lượng ước tính**: Hệ thống tự động tính toán và hiển thị tổng dung lượng ổ đĩa ước tính sẽ được giải phóng (~MB).
+
+## 5. Xuất & Nhập cấu hình
+
+Các ứng dụng gỡ hàng loạt có thể được lưu cấu hình để dễ dàng chia sẻ danh sách ứng dụng cần gỡ bỏ. File cấu hình sẽ có định dạng là `HyperLis_UWP_Preset.json`.
+
+* **Xuất cấu hình (Export Preset)**: Lưu danh sách các ứng dụng đã được chọn ra file JSON để lưu trữ hoặc chia sẻ triển khai cho các máy khác.
+* **Nhập cấu hình (Import Preset)**: Nhập file cấu hình `HyperLis_UWP_Preset.json` để tự động chọn các ứng dụng theo mẫu sẵn có một cách nhanh chóng.
+
+## 6. Khôi phục mặc định
+
+Nếu bạn muốn hoàn tác các thay đổi hoặc cài đặt lại các ứng dụng Windows mặc định đã gỡ trước đó, bạn có thể sử dụng tính năng **Khôi phục mặc định**.
+
+* **Xác nhận khôi phục**: Khi nhấn nút **Khôi phục mặc định**, hệ thống sẽ hiển thị hộp thoại xác nhận: *"Bạn có chắc chắn muốn khôi phục lại các ứng dụng Windows mặc định không? Quá trình này có thể mất vài phút."*
+* **Cơ chế thực thi**: Hệ thống sẽ tự động khởi chạy lệnh PowerShell chuyên biệt với quyền quản trị để quét kho lưu trữ ứng dụng hệ thống (`C:\Program Files\WindowsApps`) và đăng ký lại toàn bộ các gói AppX (`AppxManifest.xml`) cho tất cả người dùng:
+  ```powershell
+  Get-AppxPackage -AllUsers | Where-Object { -not [string]::IsNullOrWhiteSpace($_.InstallLocation) } | Foreach-Object { $manifest = Join-Path $_.InstallLocation 'AppxManifest.xml'; Add-AppxPackage -Register $manifest -DisableDevelopmentMode -ErrorAction SilentlyContinue }
+  ```
+* **Theo dõi tiến trình**: Toàn bộ tiến trình khôi phục sẽ được hiển thị trực quan theo thời gian thực trên cửa sổ Terminal của ứng dụng.
+* **Thời gian hoàn tất**: Quá trình đăng ký lại ứng dụng thường mất từ 1 đến 3 phút tùy theo cấu hình máy và số lượng ứng dụng cần khôi phục.

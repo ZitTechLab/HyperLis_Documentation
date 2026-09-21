@@ -1,0 +1,313 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
+
+const lang = Astro.currentLocale || 'vi';
+
+const i18n = {
+  vi: {
+    heroTitlePrefix: 'Nơi máy của bạn chạm đến',
+    heroTitleHighlight: 'hiệu năng thực của mình.',
+    description: 'Chúng tôi mang đến các giải pháp tối ưu hệ thống, nâng cao hiệu suất máy tính và cung cấp các công cụ hữu ích cho người dùng Windows.',
+    buttonText: 'Khám phá Sản phẩm'
+  },
+  en: {
+    heroTitlePrefix: 'Where your PC meets',
+    heroTitleHighlight: 'true performance.',
+    description: 'We provide system optimization solutions, enhance PC performance, and offer useful tools for Windows users.',
+    buttonText: 'Explore Products'
+  }
+};
+
+const t = i18n[lang] || i18n['vi'];
+---
+
+<section class="wu-hero not-content">
+  <div class="wu-hero-grid" aria-hidden="true"></div>
+  <div class="wu-hero-glow" aria-hidden="true"></div>
+
+  <div class="wu-hero-inner">
+    <!-- Left Copy -->
+    <div class="wu-hero-copy">
+      <div class="wu-brand-header">
+        <span class="wu-brand-title">Zịt's Tech Lab</span>
+      </div>
+      <h1 class="wu-hero-title">
+        {t.heroTitlePrefix} <br class="hidden sm:inline" />
+        <span class="gradient-text">{t.heroTitleHighlight}</span>
+      </h1>
+      <p class="wu-hero-tagline">
+        {t.description}
+      </p>
+
+      <div class="wu-hero-actions">
+        <a href="#products" class="wu-btn wu-btn-primary">
+          <span>{t.buttonText}</span>
+          <svg aria-hidden="true" class="wu-icon-arrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"></path>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Right Media -->
+    <div class="wu-hero-media">
+      <div class="wu-hero-img-frame" style="background-color: transparent; border: none; box-shadow: none;">
+        <img 
+          src={`${baseUrl}/images/zit-logo.jpg`} 
+          alt="Zịt's Tech Lab"
+          loading="eager" 
+          class="wu-hero-img"
+          style="border-radius: 20px; box-shadow: var(--wu-img-shadow);"
+          onerror={`if (this.src !== '${baseUrl}/images/hyperlis/placeholder.svg') { this.src = '${baseUrl}/images/hyperlis/placeholder.svg'; }`}
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  :global(.main-pane > main > .content-panel:first-child),
+  :global(h1#_top) {
+    display: none !important;
+  }
+
+  :global(.content-panel:first-child) {
+    display: none !important;
+  }
+
+  :global(body:not([data-has-sidebar]) .main-pane),
+  :global(body:not([data-has-sidebar]) .content-panel),
+  :global(body:not([data-has-sidebar]) .sl-container),
+  :global(body:not([data-has-sidebar]) .sl-markdown-content),
+  :global(body:has(.wu-hero) .main-pane),
+  :global(body:has(.wu-hero) main),
+  :global(body:has(.wu-hero) .content-panel),
+  :global(body:has(.wu-hero) .sl-container),
+  :global(body:has(.wu-hero) .sl-markdown-content) {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+
+  :global(body:not([data-has-sidebar]) .pagination-links),
+  :global(body:has(.wu-hero) .pagination-links),
+  :global(body:has(.wu-hero) .content-panel > footer.sl-flex),
+  :global(body:has(.wu-hero) .sl-container > footer.sl-flex) {
+    display: none !important;
+  }
+
+  .wu-hero {
+    position: relative;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 2rem 3.5rem;
+    overflow: hidden;
+    width: 100%;
+    margin-top: -25px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    background-color: var(--wu-hero-bg);
+    border-bottom: 1px solid var(--wu-border);
+  }
+
+  /* Light Theme */
+  :global(:root),
+  :global(:root[data-theme='light']) {
+    --wu-hero-bg: #f8fafc;
+    --wu-title-color: #0f172a;
+    --wu-desc-color: #475569;
+    --wu-border: #e2e8f0;
+    --wu-grid: rgba(0, 0, 0, 0.05);
+    --wu-glow: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(52, 211, 153, 0.03) 55%, transparent 75%);
+    --wu-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --wu-btn-sec-bg: #ffffff;
+    --wu-btn-sec-border: #cbd5e1;
+    --wu-btn-sec-text: #1e293b;
+    --wu-btn-sec-hover-bg: #f1f5f9;
+    --wu-img-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Dark Theme */
+  :global(:root[data-theme='dark']) {
+    --wu-hero-bg: #064e3b;
+    --wu-hero-bg: #022c22;
+    --wu-title-color: #ffffff;
+    --wu-desc-color: #a7f3d0;
+    --wu-border: rgba(255, 255, 255, 0.08);
+    --wu-grid: rgba(255, 255, 255, 0.04);
+    --wu-glow: radial-gradient(circle, rgba(52, 211, 153, 0.22) 0%, rgba(16, 185, 129, 0.06) 55%, transparent 80%);
+    --wu-gradient: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    --wu-btn-sec-bg: rgba(255, 255, 255, 0.05);
+    --wu-btn-sec-border: rgba(255, 255, 255, 0.15);
+    --wu-btn-sec-text: #e2e8f0;
+    --wu-btn-sec-hover-bg: rgba(255, 255, 255, 0.1);
+    --wu-img-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(52, 211, 153, 0.12);
+  }
+
+  /* Caro Grid Background */
+  .wu-hero-grid {
+    position: absolute;
+    inset: 0;
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, var(--wu-grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--wu-grid) 1px, transparent 1px);
+    pointer-events: none;
+  }
+
+  .wu-hero-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 650px;
+    background: var(--wu-glow);
+    filter: blur(70px);
+    pointer-events: none;
+  }
+
+  .wu-hero-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      text-align: center;
+    }
+  }
+
+  .wu-brand-header {
+    margin-bottom: 0.35rem;
+  }
+
+  .wu-brand-title {
+    font-size: clamp(2.25rem, 4.5vw, 3.85rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    color: var(--wu-title-color);
+    display: inline-block;
+  }
+
+  .wu-hero-title {
+    font-size: clamp(1.45rem, 2.35vw, 2.25rem);
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    color: var(--wu-title-color);
+    margin-bottom: 0.85rem;
+  }
+
+  .gradient-text {
+    background: var(--wu-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .wu-hero-tagline {
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--wu-desc-color);
+    margin-bottom: 1.35rem;
+    max-width: 530px;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-tagline {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .wu-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+
+  @media (max-width: 1100px) {
+    .wu-hero-actions {
+      justify-content: center;
+    }
+  }
+
+  .wu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.72rem 1.4rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  .wu-btn-primary {
+    background: #10b981;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.39);
+  }
+
+  .wu-btn-primary:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  }
+
+  .wu-icon-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .wu-btn-primary:hover .wu-icon-arrow {
+    transform: translateX(3px);
+  }
+
+  .wu-hero-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+  }
+
+  .wu-hero-img-frame {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .wu-hero-img-frame:hover {
+    transform: translateY(-3px);
+  }
+
+  .wu-hero-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+</style>

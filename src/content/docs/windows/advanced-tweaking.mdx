@@ -1,0 +1,91 @@
+---
+title: Tinh chỉnh nâng cao
+description: Bộ tối ưu hóa hệ thống cho công việc, tối ưu chuyên sâu cho Gamers và khôi phục mặc định.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Tối ưu cho công việc
+
+Áp dụng bộ tối ưu hóa phù hợp cho công việc và văn phòng:
+* Cân bằng hiệu suất với độ ổn định hệ thống
+* Tối ưu ưu tiên bộ nhớ và tiến trình cho đa nhiệm
+* An toàn để sử dụng hàng ngày trên máy công việc
+
+### Giá trị Registry bị ảnh hưởng
+* Áp dụng profile tinh chỉnh "Minimal" bao gồm:
+  * Tắt các tính năng người dùng không cần thiết (`WPFTweaksConsumerFeatures`)
+  * Tắt tự động dò tìm mạng Explorer (`WPFTweaksDisableExplorerAutoDiscovery`)
+  * Tối ưu hóa các dịch vụ hệ thống chạy ngầm (`WPFTweaksServices`)
+  * Tắt Telemetry chẩn đoán và theo dõi người dùng (`WPFTweaksTelemetry`)
+* `HKEY_CURRENT_USER\Control Panel\Mouse`
+  * `MouseSpeed` = `"1"` (REG_SZ)
+* `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Power`
+  * `HibernateEnabled` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games`
+  * `Priority` = `2` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`
+  * `NetworkThrottlingIndex` = `10` (REG_DWORD)
+
+## 3. Tối ưu chuyên sâu cho Gamers
+
+Áp dụng các chỉnh sửa hiệu suất mạnh mẽ để đạt FPS gaming tối đa:
+* Tắt các dịch vụ không cần thiết và các tiến trình nền
+* Tối ưu lập lịch CPU, mạng và cài đặt GPU
+
+### Lưu ý
+Một số tính năng hệ thống có thể bị tắt. Không khuyến nghị dùng hàng ngày.
+
+### Giá trị Registry bị ảnh hưởng
+* Kích hoạt quy trình tối ưu hóa chuyên sâu tự động (HyperLis Optimization Script):
+  * Tự động tạo System Restore Point phòng ngừa sự cố
+  * Tối ưu hóa GPU Priority & CPU Scheduling cho Gaming:
+    * `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games`
+      * `GPU Priority` = `8` (REG_DWORD)
+      * `Priority` = `6` (REG_DWORD)
+      * `Scheduling Category` = `"High"` (REG_SZ)
+    * `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`
+      * `NetworkThrottlingIndex` = `-1` (0xFFFFFFFF) (REG_DWORD)
+      * `SystemResponsiveness` = `0` (REG_DWORD)
+  * Tối ưu hóa độ trễ chuột và vô hiệu hóa gia tốc:
+    * `HKEY_CURRENT_USER\Control Panel\Mouse`
+      * `MouseSpeed` = `"0"` (REG_SZ)
+      * `MouseThreshold1` = `"0"` (REG_SZ)
+      * `MouseThreshold2` = `"0"` (REG_SZ)
+  * Tắt chế độ ngủ đông (Hibernation) để giải phóng dung lượng đĩa:
+    * `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Power`
+      * `HibernateEnabled` = `0` (REG_DWORD)
+  * Chạy kịch bản tối ưu hóa dịch vụ hệ thống: `Config\HyperLis.bat`
+  * Gỡ bỏ các ứng dụng rác (Bloatware) tích hợp sẵn trong Windows
+
+## 4. Khôi phục mặc định
+
+Đặt lại tất cả chỉnh sửa và cài đặt Windows về mặc định ban đầu:
+* Hoàn nguyên tất cả thay đổi được thực hiện trong tab Windows
+* Hữu ích nếu bạn gặp sự cố sau khi áp dụng chỉnh sửa
+* Được khuyến nghị trước các bản cập nhật Windows lớn
+
+### Giá trị Registry bị ảnh hưởng
+* Hoàn nguyên toàn bộ các profile tinh chỉnh "Minimal" và "Standard" về giá trị mặc định của hệ thống Windows
+* Khôi phục cấu hình hệ thống:
+  * `HKEY_CURRENT_USER\Control Panel\Mouse`
+    * `MouseSpeed` = `"1"` (REG_SZ)
+  * `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Power`
+    * `HibernateEnabled` = `1` (REG_DWORD)
+  * `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games`
+    * `Priority` = `2` (REG_DWORD)
+  * `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`
+    * `NetworkThrottlingIndex` = `10` (REG_DWORD)

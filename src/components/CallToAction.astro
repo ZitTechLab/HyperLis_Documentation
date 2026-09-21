@@ -1,0 +1,157 @@
+---
+const lang = Astro.currentLocale || 'vi';
+
+const i18n = {
+  vi: {
+    title: 'Bắt đầu với HyperLis',
+    subtitle: 'Khám phá bộ công cụ tối ưu hóa, dọn dẹp và tinh chỉnh Windows toàn diện top nhì (vì không có tài liệu chứng minh ┑(￣Д ￣)┍).',
+    btnFb: 'Facebook',
+    btnGit: 'Xem trên GitHub'
+  },
+  en: {
+    title: 'Get started with HyperLis',
+    subtitle: 'Discover the top second most comprehensive Windows optimization, cleaning, and tweaking toolkit (because there is no proof ┑(￣Д ￣)┍).',
+    btnFb: 'Facebook',
+    btnGit: 'View on GitHub'
+  }
+};
+const t = i18n[lang] || i18n['vi'];
+---
+
+<section class="cta-section not-content">
+  <div class="cta-container">
+    <h2 class="cta-title">{t.title}</h2>
+    <p class="cta-subtitle">
+      {t.subtitle}
+    </p>
+
+    <div class="cta-btn-row">
+      <a 
+        href="https://www.facebook.com/ZitTechLab/" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="cta-btn cta-btn-fb"
+      >
+        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <span>{t.btnFb}</span>
+        <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"></path>
+        </svg>
+      </a>
+
+      <a 
+        href="https://github.com/ZitTechLab/HyperLis" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="cta-btn cta-btn-gh"
+      >
+        <svg class="btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+        <span>{t.btnGit}</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2.75rem 2rem 1.5rem 2rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .cta-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: clamp(1.85rem, 3vw + 0.8rem, 2.5rem);
+    font-weight: 800;
+    color: var(--sl-color-white);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+  }
+
+  .cta-subtitle {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-3);
+    margin: 0 auto 1.5rem auto;
+    max-width: 580px;
+  }
+
+  .cta-btn-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+  }
+
+  /* Facebook / Primary Button */
+  .cta-btn-fb {
+    background: #0284c7;
+    color: #ffffff !important;
+    box-shadow: 0 4px 14px 0 rgba(2, 132, 199, 0.39);
+  }
+
+  .cta-btn-fb:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .cta-btn-fb:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  /* GitHub / Secondary Button */
+  .cta-btn-gh {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #e2e8f0 !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+
+  :global(:root[data-theme='light']) .cta-btn-gh {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #1e293b !important;
+  }
+
+  .cta-btn-gh:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+  }
+
+  :global(:root[data-theme='light']) .cta-btn-gh:hover {
+    background: #f1f5f9;
+    color: #0f172a !important;
+  }
+</style>

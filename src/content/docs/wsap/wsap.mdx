@@ -1,0 +1,85 @@
+---
+title: Cài đặt Windows tự động (WSAP)
+description: Giao thức cài đặt Windows tự động trực tiếp trên máy tính mà không cần sử dụng USB Boot.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/wsap/wsap-01.png" 
+  alt="Giao diện tab WSAP"
+/>
+
+## 2. Lưu ý & Điều kiện
+
+Trước khi bắt đầu quy trình cài đặt, người dùng cần kiểm tra và nắm rõ các khuyến nghị quan trọng để đảm bảo quá trình diễn ra an toàn, thuận lợi:
+
+* **Tắt Secure Boot:** Đảm bảo tính năng Secure Boot đã được tắt trong cấu hình BIOS hoặc UEFI của bo mạch chủ trước khi thực hiện.
+* **Chủ động sao lưu dữ liệu:** Toàn bộ dữ liệu cá nhân trên phân vùng cài đặt hệ điều hành sẽ được làm sạch trong quá trình cài đặt. Hãy sao lưu các tệp tin quan trọng sang ổ đĩa khác hoặc thiết bị lưu trữ ngoài.
+* **Tính tương thích của tệp cài đặt:** Tính năng hoạt động tối ưu và ổn định nhất đối với các tệp tin cài đặt Windows nguyên bản từ Microsoft. Các bản cài đặt đã qua chỉnh sửa sâu có thể gặp vấn đề về tính tương thích.
+* **Loại ổ đĩa áp dụng:** Tính năng chỉ hỗ trợ trên các ổ đĩa dạng Cơ bản. Trường hợp ổ đĩa ở định dạng Động, phần mềm sẽ hiển thị cảnh báo yêu cầu sử dụng phương pháp cài đặt truyền thống.
+
+## 3. Chọn ổ đĩa đích & Phân vùng
+
+### Chọn ổ cứng
+* **Danh sách ổ đĩa:** Chọn hiển thị toàn bộ các ổ cứng vật lý đang kết nối với máy tính, kèm thông tin mã hiệu và số thứ tự ổ đĩa. Người dùng nhấp chọn đúng ổ cứng dự định cài đặt Windows lên đó.
+
+### Thông tin phân vùng
+* Hiển thị chi tiết cấu trúc phân vùng hiện tại của ổ cứng đã chọn, bao gồm:
+  * **ID:** Thứ tự nhận diện phân vùng trên ổ đĩa.
+  * **Loại:** Phân loại phân vùng (như phân vùng hệ thống, phân vùng dữ liệu chính, phân vùng phục hồi).
+  * **Dung lượng:** Kích thước chi tiết của từng phân vùng.
+  * **Chuẩn:** Chuẩn cấu trúc bảng phân vùng của ổ đĩa.
+  * **Định dạng:** Hệ thống tệp tin của phân vùng.
+  * **Ký tự:** Ký tự ổ đĩa được gán trong Windows.
+  * **Thông tin:** Các nhãn hoặc trạng thái nhận diện đặc biệt *(Như phân vùng Boot, Hidden, System,...)*.
+
+### Chọn phân vùng Hệ thống hoặc EFI
+* Chọn phân vùng hệ thống dành riêng cho việc lưu trữ các tệp tin cấu hình khởi động của Windows.
+
+### Chọn phân vùng Cài đặt
+* **Chức năng:** Hộp chọn phân vùng đích mà người dùng muốn cài đặt hệ điều hành Windows mới lên đó *(thông thường là phân vùng ổ đĩa hệ thống hiện tại)*.
+
+## 4. Chọn phiên bản Windows
+
+Khu vực nạp tệp tin nguồn cài đặt hệ điều hành và lựa chọn phiên bản mong muốn.
+
+### Đường dẫn tệp ISO
+* **Ô hiển thị đường dẫn:** Chứa đường dẫn đến tệp tin ảnh đĩa cài đặt Windows dạng ISO trên máy.
+* **Nhấn "Chọn tệp"** để duyệt và chọn tệp tin ISO đã tải về trên máy tính.
+
+### Chọn phiên bản
+* **Danh sách phiên bản:** Tự động đọc và liệt kê toàn bộ các phiên bản hệ điều hành có trong tệp tin cài đặt *(như bản Home, Pro,...)*. Người dùng chỉ cần nhấp chọn phiên bản phù hợp với nhu cầu và giấy phép sử dụng của mình.
+
+## 5. Tích hợp Driver & Tệp cấu hình tự động
+
+Tích hợp trình điều khiển cần thiết ngay sau khi cài Windows và nạp tệp cấu hình tự động:
+
+### Chọn Driver
+* **Ô đường dẫn:** Hiển thị thư mục chứa các tệp tin trình điều khiển phần cứng cần nạp sẵn vào bộ cài.
+* **Nhấn "Chọn tệp"** Mở cửa sổ duyệt thư mục để chọn nơi lưu trữ driver dự phòng (ví dụ như driver Wi-Fi, driver mạng có dây, driver âm thanh).
+* **Lưu ý:** Tùy chọn này không bắt buộc, có thể để trống nếu người dùng có nhu cầu cài đặt driver thủ công sau khi hoàn tất cài đặt Windows.
+
+### Chọn tệp cấu hình tự động
+* **Ô đường dẫn:** Hiển thị tệp tin thiết lập cài đặt tự động (hỗ trợ định dạng XML hoặc JSON).
+* **Nút "Chọn tệp":** Duyệt và nạp tệp tin cấu hình đã chuẩn bị từ trước.
+* **Lưu ý:** Có thể để trống nếu người dùng muốn tự tay thiết lập các tùy chọn cá nhân và tài khoản sau khi cài xong.
+
+## 6. Tùy chọn nâng cao
+
+Cung cấp các công tắc kích hoạt tính năng tự động hóa và hỗ trợ vượt rào cản phần cứng trong quá trình cài đặt:
+
+* **Định dạng phân vùng đích (Khuyên dùng):** Tự động định dạng sạch sẽ phân vùng được chọn trước khi nạp hệ điều hành mới, đảm bảo loại bỏ hoàn toàn các tệp tin rác và tránh xung đột với phiên bản Windows cũ.
+* **Tự động khởi động lại sau khi chuẩn bị:** Cho phép máy tính tự động khởi động lại ngay khi phần mềm hoàn tất các khâu chuẩn bị để chuyển tiếp trực tiếp vào quá trình cài đặt.
+* **Thêm vào Menu Khởi động:** Tạo thêm một mục tùy chọn bộ cài trong danh sách menu khởi động của máy tính.
+* **Bỏ qua yêu cầu Windows 11:** Loại bỏ các điều kiện kiểm tra phần cứng nghiêm ngặt của Windows 11 *(TPM 2.0, CPU hỗ trợ chính thức, UEFI,...)*, giúp cài đặt trên các dòng máy tính cấu hình đời cũ.
+* **Bỏ qua Tài khoản Microsoft:** Tự động bỏ qua yêu cầu bắt buộc đăng nhập tài khoản Microsoft trong giai đoạn thiết lập ban đầu (OOBE), hỗ trợ tạo nhanh tài khoản người dùng cục bộ (Offline Account) để truy cập ngay vào màn hình chính.
+
+## 7. Các nút thao tác chính
+
+* **Nút "Bắt đầu":** Khởi chạy quy trình kiểm tra các dữ liệu đầu vào đã thiết lập, hiển thị các bảng thông báo xác nhận rủi ro và bắt đầu giai đoạn chuẩn bị môi trường cài đặt.
+* **Nút "Khởi động lại":** Dành cho trường hợp người dùng không bật tùy chọn tự động khởi động lại; nhấn nút này để khởi động lại máy tính và tiến hành cài đặt bất cứ khi nào sẵn sàng.
+* **Nút "Thu hồi ổ X":** Tiện ích hỗ trợ dọn dẹp và thu hồi lại không gian phân vùng tạm thời phát sinh trong quá trình thiết lập, gộp lại dung lượng cho ổ đĩa trước đó.

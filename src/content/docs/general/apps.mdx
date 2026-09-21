@@ -1,0 +1,139 @@
+---
+title: Ứng dụng
+description: Vô hiệu hóa thu thập dữ liệu phân tích và telemetry từ các phần mềm phổ biến như Office, Chrome, NVIDIA, Brave, Edge và Visual Studio.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/general/general-01.png" 
+  alt="Giao diện tab Chung (General)"
+/>
+
+## 2. Tắt theo dõi từ Office
+
+Vô hiệu hóa thu thập dữ liệu phân tích trong Microsoft Office.
+* Ngăn các ứng dụng Office gửi thống kê sử dụng đến Microsoft
+* Xóa tác vụ Office Telemetry Agent định kỳ
+* Cải thiện quyền riêng tư cho người dùng Office
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Policies\microsoft\office\16.0\osm\preventedapplications`
+  * `accesssolution` = `1` (REG_DWORD)
+  * `olksolution` = `1` (REG_DWORD)
+  * `onenotesolution` = `1` (REG_DWORD)
+  * `pptsolution` = `1` (REG_DWORD)
+  * `projectsolution` = `1` (REG_DWORD)
+  * `publishersolution` = `1` (REG_DWORD)
+  * `visiosolution` = `1` (REG_DWORD)
+  * `wdsolution` = `1` (REG_DWORD)
+  * `xlsolution` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Policies\microsoft\office\16.0\osm\preventedsolutiontypes`
+  * `agave` = `1` (REG_DWORD)
+  * `appaddins` = `1` (REG_DWORD)
+  * `comaddins` = `1` (REG_DWORD)
+  * `documentfiles` = `1` (REG_DWORD)
+  * `templatefiles` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail` & `...\16.0\...`
+  * `EnableLogging` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Calendar` & `...\16.0\...`
+  * `EnableCalendarLogging` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\15.0\Word\Options` & `...\16.0\...`
+  * `EnableLogging` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Office\15.0\OSM` & `...\16.0\...`
+  * `EnableLogging` = `0` (REG_DWORD)
+  * `EnableUpload` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\Common\ClientTelemetry` & `...\16.0\...`
+  * `DisableTelemetry` = `1` (REG_DWORD)
+  * `VerboseLogging` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\15.0\Common` & `...\16.0\...`
+  * `QMEnable` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\SOFTWARE\Microsoft\Office\15.0\Common\Feedback` & `...\16.0\...`
+  * `Enabled` = `0` (REG_DWORD)
+
+## 3. Tắt theo dõi từ Chrome
+
+Vô hiệu hóa phân tích và báo cáo lỗi trong Google Chrome qua chính sách registry.
+* Ngăn Chrome gửi thống kê sử dụng và báo cáo sự cố
+* Áp dụng qua Windows Group Policy cho Chrome
+* Cải thiện quyền riêng tư khi sử dụng Chrome
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome`
+  * `MetricsReportingEnabled` = `0` (REG_DWORD)
+  * `ChromeCleanupReportingEnabled` = `0` (REG_DWORD)
+  * `ChromeCleanupEnabled` = `0` (REG_DWORD)
+  * `UserFeedbackAllowed` = `0` (REG_DWORD)
+  * `DeviceMetricsReportingEnabled` = `0` (REG_DWORD)
+
+## 4. Tắt theo dõi từ NVIDIA
+
+Vô hiệu hóa các dịch vụ phân tích của NVIDIA thu thập dữ liệu sử dụng GPU.
+* Dừng dịch vụ NVIDIA Telemetry Container
+* Xóa các tác vụ định kỳ thu thập dữ liệu NVIDIA
+* Giảm nhẹ việc sử dụng CPU nền từ driver NVIDIA
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer`
+  * `Start` = `4` (REG_DWORD)
+
+## 5. Tắt theo dõi từ Brave
+
+Vô hiệu hóa phân tích và báo cáo lỗi trong trình duyệt Brave qua chính sách registry.
+* Ngăn Brave gửi thống kê sử dụng
+* Áp dụng qua Windows Group Policy cho Brave
+* Tăng cường quyền riêng tư cho người dùng Brave
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\BraveSoftware\Brave`
+  * `BraveRewardsDisabled` = `1` (REG_DWORD)
+  * `BraveWalletDisabled` = `1` (REG_DWORD)
+  * `BraveVPNDisabled` = `1` (REG_DWORD)
+  * `BraveAIChatEnabled` = `0` (REG_DWORD)
+
+## 6. Tắt theo dõi từ Edge
+
+Vô hiệu hóa thu thập dữ liệu chẩn đoán trong Microsoft Edge.
+* Ngăn Edge gửi dữ liệu chẩn đoán duyệt web đến Microsoft
+* Áp dụng qua Windows Group Policy cho Edge
+* Được khuyến nghị cho người dùng quan tâm đến quyền riêng tư
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge`
+  * `HubsSidebarEnabled` = `0` (REG_DWORD)
+  * `UserFeedbackAllowed` = `0` (REG_DWORD)
+  * `ConfigureDoNotTrack` = `1` (REG_DWORD)
+  * `AlternateErrorPagesEnabled` = `0` (REG_DWORD)
+  * `EdgeCollectionsEnabled` = `0` (REG_DWORD)
+  * `MicrosoftEdgeInsiderPromotionEnabled` = `0` (REG_DWORD)
+  * `ShowMicrosoftRewards` = `0` (REG_DWORD)
+  * `WebWidgetAllowed` = `0` (REG_DWORD)
+  * `DiagnosticData` = `0` (REG_DWORD)
+  * `EdgeAssetDeliveryServiceEnabled` = `0` (REG_DWORD)
+  * `PersonalizationReportingEnabled` = `0` (REG_DWORD)
+
+## 7. Tắt theo dõi từ Visual Studio
+
+Vô hiệu hóa phân tích trong Microsoft Visual Studio và các công cụ nhà phát triển liên quan.
+* Dừng VS gửi dữ liệu sử dụng và báo cáo sự cố
+* Giảm hoạt động mạng nền trong quá trình phát triển
+* Cải thiện quyền riêng tư cho lập trình viên
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\VisualStudio\Telemetry`
+  * `TurnOffSwitch` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback`
+  * `DisableFeedbackDialog` = `1` (REG_DWORD)
+  * `DisableEmailInput` = `1` (REG_DWORD)
+  * `DisableScreenshotCapture` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\VisualStudio\SQM`
+  * `OptIn` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\VisualStudio\Setup`
+  * `ConcurrentDownloads` = `2` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VSCommon\14.0\SQM` (và `15.0`, `16.0`, `17.0`)
+  * `OptIn` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\VSCommon\14.0\SQM` (và `15.0`, `16.0`, `17.0`)
+  * `OptIn` = `0` (REG_DWORD)

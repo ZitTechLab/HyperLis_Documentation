@@ -1,0 +1,102 @@
+---
+title: Cập nhật Windows (Windows Update)
+description: Tạm dừng cập nhật, tắt cập nhật Store, tắt Windows Update, dịch vụ Insider Preview và cập nhật Driver.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Tạm dừng cập nhật đến năm 2036
+
+Tạm dừng Windows Update cho đến năm 2036:
+* Ngăn cập nhật Windows tự động trong nhiều năm
+* Sử dụng registry để đặt ngày tạm dừng cập nhật tối đa
+
+### Lưu ý
+Hệ thống sẽ KHÔNG nhận các bản vá bảo mật trong thời gian này.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings`
+  * `FlightSettingsMaxPauseDays` = `3650` (0x0E42) (REG_DWORD)
+
+## 3. Tắt cập nhật MS Store
+
+Tắt cập nhật tự động cho các ứng dụng cài từ Microsoft Store:
+* Ngăn ứng dụng Store tự cập nhật nền
+* Giảm sử dụng mạng và CPU nền
+* Bạn vẫn có thể cập nhật thủ công ứng dụng từ Store
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore`
+  * `AutoDownload` = `2` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\CloudContent`
+  * `DisableSoftLanding` = `1` (REG_DWORD)
+  * `DisableWindowsConsumerFeatures` = `1` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager`
+  * `SilentInstalledAppsEnabled` = `0` (REG_DWORD)
+  * `PreInstalledAppsEnabled` = `0` (REG_DWORD)
+  * `OemPreInstalledAppsEnabled` = `0` (REG_DWORD)
+
+## 4. Tắt Windows Update
+
+Vô hiệu hóa hoàn toàn tất cả dịch vụ Windows Update:
+* Dừng wuauserv, WaaSMedicSvc và các dịch vụ liên quan
+* Ngăn bất kỳ cập nhật tự động nào chạy
+
+### Lưu ý
+Đây là rủi ro bảo mật lớn. Chỉ dùng trên hệ thống cô lập. Tính năng này cũng ảnh hưởng đến một số tính năng trong HyperLis như WSAP.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU`
+  * `NoAutoUpdate` = `1` (REG_DWORD)
+  * `AUOptions` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config`
+  * `DODownloadMode` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wuauserv`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\UsoSvc`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WaaSMedicSvc`
+  * `Start` = `4` (REG_DWORD)
+
+## 5. Tắt dịch vụ Insider Preview
+
+Tắt dịch vụ chương trình Windows Insider:
+* Dừng ManagementService cho các bản build Insider
+* Ngăn đăng ký chương trình xem trước Insider
+* Được khuyến nghị cho các hệ thống sản xuất ổn định
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wisvc`
+  * `Start` = `4` (REG_DWORD)
+
+## 6. Tắt cập nhật Driver
+
+Ngăn Windows Update tự động cài đặt driver phần cứng:
+* Ngăn Windows thay thế các driver bạn đã cài thủ công
+* Ngăn cài đặt driver cũ hơn hoặc không tương thích
+* Được khuyến nghị sau khi cài thủ công driver GPU hoặc chipset
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate`
+  * `ExcludeWUDriversInQualityUpdate` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings`
+  * `ExcludeWUDriversInQualityUpdate` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate`
+  * `value` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Update`
+  * `ExcludeWUDriversInQualityUpdate` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Update`
+  * `ExcludeWUDriversInQualityUpdate` = `1` (REG_DWORD)

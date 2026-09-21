@@ -1,0 +1,44 @@
+---
+title: Dọn dẹp
+description: Loại bỏ tệp tạm thời, báo cáo lỗi hệ thống, bộ nhớ đệm dư thừa, giải phóng dung lượng RAM và làm trống thùng rác.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/cleaning/cleanup-01.png" 
+  alt="Giao diện tab Dọn dẹp (Cleanup)"
+/>
+
+## 2. Dọn dẹp Windows & RAM
+
+Cung cấp các tùy chọn dọn dẹp chuyên sâu dành riêng cho hệ điều hành Windows và bộ nhớ RAM:
+* **Tệp tạm thời (Temporary Files)**: Quét và dọn sạch các tệp dữ liệu tạm sinh ra trong quá trình hoạt động của Windows và các ứng dụng bên thứ ba (`%TEMP%` và `C:\Windows\Temp`).
+* **BSOD Minidumps**: Xóa các tệp nhật ký ghi nhớ sự cố màn hình xanh chết chóc (BSOD) nằm trong thư mục `C:\Windows\Minidump`.
+* **Báo cáo lỗi (Error Reports)**: Dọn sạch kho lưu trữ báo cáo sự cố Windows Error Reporting (WER) trong cả `AppData` người dùng và `ProgramData`.
+* **Dọn thùng rác (Empty Recycle Bin)**: Làm sạch toàn bộ các tệp tin đang nằm trong Thùng rác hệ thống một cách an toàn và lặng lẽ.
+* **Cache cập nhật (Update Cache)**: Xóa sạch bộ nhớ đệm tải về của Windows Update (`SoftwareDistribution\Download`) vốn chiếm nhiều gigabyte sau mỗi đợt nâng cấp hệ điều hành.
+* **Khôi phục hệ thống (System Restore)**: Xóa các điểm khôi phục cũ (Shadow Copies) tích lũy lâu ngày để thu hồi dung lượng đĩa lớn.
+* **Bộ nhớ đệm RAM (RAM Cache)**: Giải phóng danh sách bộ nhớ đệm chờ (Standby List) của RAM, đưa bộ nhớ đệm không còn sử dụng trở lại trạng thái khả dụng cho các tác vụ nặng hoặc chơi game.
+* **Bộ nhớ RAM đang dùng (RAM Usage)**: Thu hồi và tối ưu hóa các tập làm việc (Working Sets) của các tiến trình đang chiếm giữ RAM không cần thiết.
+
+## 3. Dọn dẹp trình duyệt web (Browsers)
+
+Hỗ trợ dọn dẹp độc lập và triệt để cho 4 trình duyệt web phổ biến nhất: **Google Chrome**, **Microsoft Edge**, **Brave** và **Mozilla Firefox**:
+* **Bộ nhớ đệm (Cache)**: Xóa sạch hình ảnh, tập tin tạm, cache mã nguồn và shader của trình duyệt.
+* **Cookies**: Xóa cookies lưu trữ của các trang web.
+* **Lịch sử (History)**: Xóa lịch sử duyệt web và lịch sử tìm kiếm đã lưu.
+* **Phiên làm việc (Session)**: Đóng và dọn dẹp các tab/phiên làm việc trước đó.
+* **Mật khẩu (Passwords)**: Xóa thông tin mật khẩu đăng nhập đã lưu trong trình duyệt (Chrome và Brave).
+
+## 4. Các phương thức dọn dẹp & Tối ưu hóa
+
+* **Dọn dẹp bằng HyperLis**:
+  * Hệ thống sẽ quét toàn bộ các mục đã chọn và hiển thị cửa sổ xác nhận gồm liệt kê chi tiết danh sách tệp rác và dung lượng ước tính sẽ được giải phóng.
+  * Khi hoàn tất, bảng thông báo tổng kết sẽ liệt kê chi tiết số lượng mục đã xóa và các thành phần đã được dọn dẹp.
+* **Dọn dẹp bằng Disk Cleanup**: Khởi chạy công cụ dọn dẹp ổ đĩa mặc định của Windows (`cleanmgr.exe`) với chế độ dọn sạch triệt để.
+* **Dùng cả hai phương pháp**: Tự động chạy thuật toán dọn dẹp của HyperLis trước, sau đó tiếp tục kích hoạt Disk Cleanup (`cleanmgr.exe`) của Windows để đạt hiệu quả dọn rác tối đa.
+* **Tối ưu hóa ổ đĩa**: Mở nhanh giao diện tối ưu hóa ổ cứng Windows (`dfrgui.exe`) để thực hiện chống phân mảnh cho ổ HDD hoặc gửi lệnh TRIM tối ưu tốc độ cho ổ SSD.

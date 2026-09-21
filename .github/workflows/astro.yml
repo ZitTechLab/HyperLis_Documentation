@@ -1,0 +1,10 @@
+# File này đã được gộp vào deploy.yml để tránh xung đột race condition.
+# Không kích hoạt workflow này.
+name: (Disabled) Deploy Astro site to Pages
+on:
+  workflow_dispatch:
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow disabled. Using deploy.yml instead."

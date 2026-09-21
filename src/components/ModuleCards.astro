@@ -1,0 +1,237 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL.slice(0, -1) 
+  : import.meta.env.BASE_URL;
+
+const lang = Astro.currentLocale || 'vi';
+
+const i18n = {
+  vi: {
+    sectionTitle: 'Khám phá các tính năng tiêu biểu',
+    modules: [
+      {
+        num: '01',
+        title: 'Tổng quan (Dashboard & Overview)',
+        desc: 'Trung tâm điều khiển phần mềm, biểu đồ đo tải CPU/RAM thời gian thực và chính sách an toàn tạo Restore Point.',
+        link: `${baseUrl}/getting-started/overview/`,
+        badge: 'Tổng quan',
+        cta: 'Xem tài liệu'
+      },
+      {
+        num: '02',
+        title: 'Windows',
+        desc: 'Tối ưu Gaming Mode & HAGS, kiểm soát cập nhật Windows Update, bảo vệ quyền riêng tư và tùy biến Taskbar.',
+        link: `${baseUrl}/windows/gaming/`,
+        badge: 'Hệ thống',
+        cta: 'Xem tài liệu'
+      },
+      {
+        num: '03',
+        title: 'Tải xuống (Downloads)',
+        desc: 'Tải nhanh và cài đặt tự động trọn gói Visual C++ All-in-One, DirectX, .NET Runtime và phần mềm thiết yếu.',
+        link: `${baseUrl}/download/download/`,
+        badge: 'Tải xuống',
+        cta: 'Xem tài liệu'
+      },
+      {
+        num: '04',
+        title: 'QL Bản quyền (Manage License)',
+        desc: 'Quản lý và kích hoạt bản quyền số vĩnh viễn (Digital License), giấy phép KMS cho Windows và Microsoft Office.',
+        link: `${baseUrl}/manage-license/manage-license/`,
+        badge: 'Bản quyền',
+        cta: 'Xem tài liệu'
+      }
+    ]
+  },
+  en: {
+    sectionTitle: 'Explore Key Features',
+    modules: [
+      {
+        num: '01',
+        title: 'Dashboard & Overview',
+        desc: 'Software control center, real-time CPU/RAM load charts, and safe Restore Point creation policies.',
+        link: `${baseUrl}/en/getting-started/overview/`,
+        badge: 'Overview',
+        cta: 'View Docs'
+      },
+      {
+        num: '02',
+        title: 'Windows',
+        desc: 'Optimize Gaming Mode & HAGS, control Windows Updates, protect privacy, and customize the Taskbar.',
+        link: `${baseUrl}/en/windows/gaming/`,
+        badge: 'System',
+        cta: 'View Docs'
+      },
+      {
+        num: '03',
+        title: 'Downloads',
+        desc: 'Fast download and automated installation of Visual C++ All-in-One, DirectX, .NET Runtime, and essential software.',
+        link: `${baseUrl}/en/download/download/`,
+        badge: 'Downloads',
+        cta: 'View Docs'
+      },
+      {
+        num: '04',
+        title: 'Manage License',
+        desc: 'Manage and activate permanent Digital Licenses, KMS licenses for Windows and Microsoft Office.',
+        link: `${baseUrl}/en/manage-license/manage-license/`,
+        badge: 'License',
+        cta: 'View Docs'
+      }
+    ]
+  }
+};
+const t = i18n[lang] || i18n['vi'];
+---
+
+<section class="modules-section not-content">
+  <div class="section-header">
+    <h2 class="section-title">{t.sectionTitle}</h2>
+  </div>
+
+  <div class="modules-grid">
+    {t.modules.map((mod) => (
+      <a href={mod.link} class="module-card">
+        <div class="module-card-top">
+          <span class="module-num">{mod.num}</span>
+          <span class="module-badge">{mod.badge}</span>
+        </div>
+        <h3 class="module-title">{mod.title}</h3>
+        <p class="module-desc">{mod.desc}</p>
+        <div class="module-arrow">
+          <span>{mod.cta}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .modules-section {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2.25rem 3rem;
+  }
+
+  @media (max-width: 640px) {
+    .modules-section {
+      padding: 1.75rem 1.25rem;
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+    line-height: 1.25;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 1100px) {
+    .modules-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .modules-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .module-card {
+    background: var(--sl-color-bg-sidebar);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.75rem;
+    padding: 1.75rem;
+    text-decoration: none !important;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .module-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--sl-color-accent);
+    box-shadow: var(--hl-shadow-md);
+  }
+
+  .module-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .module-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--sl-color-gray-3);
+  }
+
+  .module-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+    background: rgba(30, 144, 255, 0.12);
+    color: var(--sl-color-accent);
+    border: 1px solid rgba(30, 144, 255, 0.25);
+  }
+
+  .module-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+    margin: 0 0 0.6rem 0;
+  }
+
+  .module-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--sl-color-gray-3);
+    margin: 0 0 1.25rem 0;
+    flex-grow: 1;
+  }
+
+  .module-arrow {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--sl-color-accent);
+    margin-top: auto;
+    transition: gap 0.2s ease;
+  }
+
+  .module-card:hover .module-arrow {
+    gap: 0.65rem;
+  }
+
+  .module-arrow svg {
+    transition: transform 0.2s ease;
+  }
+
+  .module-card:hover .module-arrow svg {
+    transform: translateX(3px);
+  }
+</style>

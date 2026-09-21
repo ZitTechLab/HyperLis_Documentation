@@ -1,0 +1,69 @@
+---
+interface Props {
+  src?: string;
+  alt: string;
+  caption?: string;
+  title?: string;
+}
+
+const {
+  src,
+  alt = 'giao diện tab',
+} = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL.slice(0, -1)
+  : import.meta.env.BASE_URL;
+
+// Tự động trích xuất tên tab từ alt (ví dụ: "Giao diện tab WSAP" -> "tab WSAP")
+const cleanAlt = alt ? alt.trim() : 'tab';
+const tabLabel = cleanAlt.replace(/^giao diện\s+/i, '');
+const missingMessage = `Hình ảnh chứa ${tabLabel} bị thiếu`;
+
+// Tạo SVG Data URI hiển thị chữ ở giữa cho fallback
+const svgDataUri = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" width="100%" height="100%"><rect width="800" height="420" rx="12" fill="%230f172a" stroke="%23334155" stroke-width="2" stroke-dasharray="6 6"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500">${encodeURIComponent(missingMessage)}</text></svg>`;
+
+function resolveSrc(imgSrc?: string) {
+  if (!imgSrc || imgSrc.includes('placeholder')) return svgDataUri;
+  if (imgSrc.startsWith('http://') || imgSrc.startsWith('https://') || imgSrc.startsWith('data:')) return imgSrc;
+  if (imgSrc.startsWith(baseUrl)) return imgSrc;
+  return `${baseUrl}${imgSrc.startsWith('/') ? imgSrc : `/${imgSrc}`}`;
+}
+
+const finalSrc = resolveSrc(src);
+---
+
+<figure class="hl-screenshot-wrapper">
+  <img 
+    src={finalSrc} 
+    alt={alt} 
+    loading="lazy" 
+    class="hl-screenshot-img"
+    onerror={`if (!this.src.startsWith('data:')) { this.src = '${svgDataUri}'; }`}
+  />
+</figure>
+
+<style>
+  .hl-screenshot-wrapper {
+    margin: 1.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hl-screenshot-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 540px;
+    display: block;
+    border-radius: 0.5rem;
+    object-fit: contain;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  :root[data-theme='dark'] .hl-screenshot-img {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+</style>

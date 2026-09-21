@@ -1,0 +1,78 @@
+---
+title: Quyền riêng tư
+description: Tắt các tác vụ theo dõi Telemetry Tasks của Windows, chia sẻ Media Player, HomeGroup và giao thức mạng cũ SMB v1/v2.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/general/general-01.png" 
+  alt="Giao diện tab Chung (General)"
+/>
+
+## 2. Tắt các tác vụ theo dõi (Telemetry Tasks)
+
+Vô hiệu hóa các tác vụ định kỳ của Windows thu thập và gửi dữ liệu phân tích.
+* Xóa các tác vụ thu thập dữ liệu khỏi Task Scheduler
+* Giảm sử dụng CPU và đĩa nền
+* Cải thiện quyền riêng tư bằng cách dừng thu thập dữ liệu của Microsoft
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\dmwappushservice`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection`
+  * `MaxTelemetryAllowed` = `0` (REG_DWORD)
+  * `AllowTelemetry` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System`
+  * `UploadUserActivities` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection`
+  * `AllowTelemetry` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener`
+  * `Start` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener`
+  * `Start` = `0` (REG_DWORD)
+
+## 3. Tắt chia sẻ Media Player
+
+Vô hiệu hóa dịch vụ chia sẻ mạng của Windows Media Player.
+* Ngăn WMP chia sẻ thư viện phương tiện qua mạng
+* Giải phóng tài nguyên hệ thống nếu bạn không dùng chia sẻ phương tiện mạng
+* Cải thiện quyền riêng tư và giảm lưu lượng mạng không cần thiết
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WMPNetworkSvc`
+  * `Start` = `4` (REG_DWORD)
+
+## 4. Tắt HomeGroup
+
+Vô hiệu hóa tính năng mạng HomeGroup.
+* HomeGroup đã bị xóa trong Windows 10 v1803 trở lên, chủ yếu dành cho hệ thống cũ
+* Dừng các dịch vụ liên quan chạy nền
+* Dùng chia sẻ mạng workgroup tiêu chuẩn thay thế
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HomeGroupListener`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\HomeGroupProvider`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HomeGroup`
+  * `DisableHomeGroup` = `1` (REG_DWORD)
+
+## 5. Tắt giao thức SMB v1 & v2
+
+Vô hiệu hóa giao thức mạng SMB v1 và v2.
+* SMB v1 là giao thức cũ có lỗ hổng nghiêm trọng (ví dụ: ransomware WannaCry)
+* SMB v2 cũ hơn và kém bảo mật hơn SMB v3
+
+### Lưu ý
+Tắt SMB v2 có thể gây lỗi chia sẻ file với một số thiết bị mạng cũ.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters`
+  * `SMB1` = `0` (REG_DWORD)
+  * `SMB2` = `0` (REG_DWORD)

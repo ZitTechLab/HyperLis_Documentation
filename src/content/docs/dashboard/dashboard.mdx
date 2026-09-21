@@ -1,0 +1,59 @@
+---
+title: Trung tâm điều khiển (Dashboard)
+description: Tìm hiểu bố cục không gian làm việc, biểu đồ hiệu suất phần cứng và lối tắt thao tác nhanh trên Dashboard HyperLis.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/dashboard/dashboard-01.png" 
+  alt="Giao diện tab Dashboard"
+/>
+
+## 2. Tổng quan về Dashboard
+
+**Dashboard (Trung tâm điều khiển)** là màn hình khởi đầu của HyperLis, nơi bạn có thể quan sát nhanh toàn bộ trạng thái hệ thống và truy cập các tính năng quan trọng chỉ trong một màn hình duy nhất mà không cần tìm kiếm phức tạp qua nhiều tab khác nhau.
+
+## 3. Các thành phần chính trên Dashboard
+
+### Tổng quan hệ thống (Performance Tracker)
+Tại khu vực đo đạc hiệu suất trung tâm, bạn có thể theo dõi nhanh tình trạng tải phần cứng theo thời gian thực:
+* **Trạng thái CPU:** Tỷ lệ % tải và tần số xung nhịp hiện tại của bộ vi xử lý.
+* **Dung lượng RAM:** Tỷ lệ % và dung lượng RAM thực tế đang sử dụng trên tổng dung lượng RAM của máy.
+* **Trạng thái GPU:** Tỷ lệ % hoạt động và dung lượng VRAM đang chiếm dụng của card đồ họa.
+
+> **Mục tiêu:** Giúp bạn nắm rõ *“máy đang ở trạng thái nào”* trước khi thực hiện bất kỳ tinh chỉnh hay dọn dẹp nào.
+
+### Cài đặt nhanh (Quick Settings)
+Các công tắc gạt trực quan cho phép bật/tắt tức thì các tinh chỉnh hệ thống quan trọng nhất:
+* **Optimize Performance:** Tối ưu hóa hiệu suất tổng thể của hệ điều hành.
+* **Extreme Gaming:** Kích hoạt chế độ đẩy hiệu năng chơi game tối đa.
+* **No Error Reports:** Tắt tính năng báo cáo lỗi ngầm của Windows.
+* **Disable Print/Fax:** Tắt dịch vụ máy in và fax nếu không sử dụng.
+* **No Sticky Keys:** Tắt phím dính (tránh văng game khi ấn Shift liên tục).
+* **No SmartScreen:** Tắt bộ lọc SmartScreen để cài đặt phần mềm nhanh hơn.
+
+### Lối tắt tính năng (Shortcuts)
+Khu vực lối tắt giúp bạn nhấp một chạm để chuyển thẳng đến các khu vực làm việc chính:
+* *General, Windows, UWP Apps, Startup Apps, Download, Cleaning, Network, USB Boot, Hardware, Extend Features, WSAP.*
+* **Nút Edit Shortcuts:** Cho phép bạn tùy chỉnh hiển thị hoặc ẩn các icon lối tắt theo sở thích cá nhân.
+
+## 4. Thiết kế hướng hiệu năng
+
+Dashboard của HyperLis được thiết kế theo triết lý tối ưu:
+* **Không chạy tiến trình nền liên tục:** Không tiêu tốn CPU/RAM ngầm khi bạn không mở phần mềm.
+* **Không ảnh hưởng FPS khi chơi game:** Sau khi tối ưu, phần mềm giải phóng hoàn toàn bộ nhớ.
+* **Không làm chậm hệ thống khi làm việc.**
+
+## 5. Giá trị thực tế cho từng đối tượng
+
+* **Đối với Gamer:** Nhanh chóng kiểm tra mức tiêu thụ RAM và CPU trước khi vào trận đấu, sau đó truy cập ngay tab Gaming hoặc Cleaning để tối ưu chỉ trong vài giây.
+* **Đối với IT Support & Helpdesk:** Đánh giá tình trạng máy của khách hàng ngay lập tức khi tiếp nhận máy để đưa ra quyết định xử lý phù hợp.
+* **Đối với Người dùng thông thường:** Nhìn nhận tổng quan tình trạng máy và thao tác dễ dàng mà không cần hiểu biết kỹ thuật sâu.
+
+<Aside type="tip">
+**Mẹo sử dụng:** Hãy bắt đầu mỗi lần mở HyperLis bằng việc kiểm tra Dashboard để xem máy tính có đang bị nghẽn RAM hay CPU không, sau đó mới lựa chọn dọn dẹp hay tinh chỉnh tương ứng.
+</Aside>

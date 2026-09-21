@@ -1,0 +1,170 @@
+---
+title: Hệ thống
+description: Tinh chỉnh hiệu suất hệ thống, tối ưu hóa hiển thị, tắt báo cáo lỗi, SmartScreen và quản lý dịch vụ Windows.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/general/general-01.png" 
+  alt="Giao diện tab Chung (General)"
+/>
+
+## 2. Tối ưu hóa hiệu năng
+
+Điều chỉnh một số cài đặt hệ thống để tăng hiệu suất:
+* Tắt hiệu ứng hình ảnh, độ trễ khởi động và tối ưu hóa ứng dụng nền
+* Đặt lịch trình bộ xử lý để ưu tiên ứng dụng đang chạy
+* Giảm mức sử dụng bộ nhớ của các tiến trình hệ thống
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl`
+  * `CrashDumpEnabled` = `3` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoComplete`
+  * `Append Completion` = `"yes"` (REG_SZ)
+  * `AutoSuggest` = `"yes"` (REG_SZ)
+* `HKEY_CURRENT_USER\Control Panel\Desktop`
+  * `MenuShowDelay` = `"200"` (REG_SZ)
+  * `AutoEndTasks` = `"1"` (REG_SZ)
+  * `HungAppTimeout` = `"1000"` (REG_SZ)
+  * `WaitToKillAppTimeout` = `"2000"` (REG_SZ)
+  * `LowLevelHooksTimeout` = `"1000"` (REG_SZ)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile`
+  * `NetworkThrottlingIndex` = `-1` (0xFFFFFFFF) (REG_DWORD)
+  * `SystemResponsiveness` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games`
+  * `GPU Priority` = `8` (REG_DWORD)
+  * `Priority` = `6` (REG_DWORD)
+  * `Scheduling Category` = `"High"` (REG_SZ)
+
+## 3. Tắt báo cáo lỗi
+
+Ngăn Windows tự động gửi báo cáo lỗi và nhật ký sự cố đến Microsoft.
+* Vô hiệu hóa dịch vụ Windows Error Reporting (WER)
+* Ngăn báo cáo sự cố tự động
+* Cải thiện quyền riêng tư bằng cách không gửi dữ liệu chẩn đoán
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting`
+  * `Disabled` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting`
+  * `DoReport` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting`
+  * `Disabled` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WerSvc`
+  * `Start` = `4` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wercplsupport`
+  * `Start` = `4` (REG_DWORD)
+
+## 4. Tắt SmartScreen
+
+Tắt bộ lọc Microsoft SmartScreen kiểm tra file tải xuống và trang web.
+* Loại bỏ hộp thoại cảnh báo 'Windows đã bảo vệ máy tính của bạn'
+* Hữu ích nếu bạn thường xuyên cài đặt phần mềm từ nguồn tin cậy
+
+### Lưu ý
+Tắt tính năng này làm giảm bảo vệ chống file độc hại.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments`
+  * `SaveZoneInformation` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments`
+  * `ScanWithAntiVirus` = `1` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System`
+  * `ShellSmartScreenLevel` = `"Warn"` (REG_SZ)
+  * `EnableSmartScreen` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer`
+  * `SmartScreenEnabled` = `"Off"` (REG_SZ)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\PhishingFilter`
+  * `EnabledV9` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\AppHost`
+  * `PreventOverride` = `0` (REG_DWORD)
+* `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance`
+  * `Enabled` = `0` (REG_DWORD)
+
+## 5. Tắt tối ưu hóa chế độ toàn màn hình
+
+Vô hiệu hóa Fullscreen Optimizations (Tối ưu hóa toàn màn hình) được giới thiệu trong Windows 10.
+* Có thể giúp cải thiện khả năng tương thích và FPS trong một số game cũ
+* Ngăn Windows quản lý chế độ toàn màn hình của ứng dụng
+* Hữu ích cho game thủ thi đấu cần mọi khung hình
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\System\GameConfigStore`
+  * `GameDVR_DXGIHonorFSEWindowsCompatible` = `1` (REG_DWORD)
+
+## 6. Tắt dịch vụ in ấn
+
+Dừng dịch vụ Print Spooler của Windows khỏi việc chạy.
+* Giải phóng tài nguyên hệ thống nếu bạn không dùng máy in
+* Giảm nguy cơ bị tấn công từ các lỗ hổng kiểu PrintNightmare
+
+### Lưu ý
+Bạn sẽ KHÔNG thể in tài liệu khi tính năng này bị tắt.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Spooler`
+  * `Start` = `3` (REG_DWORD)
+
+## 7. Tắt dịch vụ Fax
+
+Dừng dịch vụ Fax và Scan của Windows.
+* Giải phóng tài nguyên hệ thống vì hầu hết người dùng không dùng fax
+* Ngăn dịch vụ nền không cần thiết chạy
+
+### Lưu ý
+Bạn sẽ không thể gửi hoặc nhận fax khi bị tắt.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Fax`
+  * `Start` = `4` (REG_DWORD)
+
+## 8. Tắt phím dính (Sticky Keys)
+
+Tắt phím tắt trợ năng 'Sticky Keys' (nhấn Shift 5 lần).
+* Ngăn hộp thoại khó chịu xuất hiện khi chơi game
+* Cũng tắt phím tắt Toggle Keys và Filter Keys
+* Được khuyến nghị cho game thủ hay nhấn Shift nhanh
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys`
+  * `Flags` = `"506"` (REG_SZ)
+* `HKEY_USERS\.DEFAULT\Control Panel\Accessibility\StickyKeys`
+  * `Flags` = `"506"` (REG_SZ)
+* `HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response`
+  * `Flags` = `"122"` (REG_SZ)
+* `HKEY_USERS\.DEFAULT\Control Panel\Accessibility\Keyboard Response`
+  * `Flags` = `"122"` (REG_SZ)
+* `HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys`
+  * `Flags` = `"58"` (REG_SZ)
+* `HKEY_USERS\.DEFAULT\Control Panel\Accessibility\ToggleKeys`
+  * `Flags` = `"58"` (REG_SZ)
+
+## 9. Cài đặt hiển thị cho hiệu suất
+
+Điều chỉnh cài đặt hiển thị và hình ảnh để đạt hiệu suất tối đa.
+* Tắt hoạt ảnh, bóng đổ và hiệu ứng hình ảnh trong Windows
+* Tăng tốc độ hiển thị cửa sổ và phản hồi giao diện
+* Tốt nhất cho phần cứng cũ hoặc người dùng ưu tiên tốc độ hơn thẩm mỹ
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Control Panel\Desktop`
+  * `DragFullWindows` = `"1"` (REG_SZ)
+  * `MenuShowDelay` = `"200"` (REG_SZ)
+* `HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics`
+  * `MinAnimate` = `"0"` (REG_SZ)
+* `HKEY_CURRENT_USER\Control Panel\Keyboard`
+  * `KeyboardDelay` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `ListviewAlphaSelect` = `1` (REG_DWORD)
+  * `ListviewShadow` = `0` (REG_DWORD)
+  * `TaskbarAnimations` = `0` (REG_DWORD)
+  * `TaskbarMn` = `0` (REG_DWORD)
+  * `TaskbarDa` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects`
+  * `VisualFXSetting` = `3` (REG_DWORD)
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM`
+  * `EnableAeroPeek` = `0` (REG_DWORD)

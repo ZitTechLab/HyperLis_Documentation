@@ -1,0 +1,64 @@
+---
+title: Quản lý AI trên Trình duyệt
+description: Tắt và gỡ bỏ hoặc khôi phục các tính năng trí tuệ nhân tạo (AI), Copilot, Gemini trên Chrome, Edge và Firefox.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Gỡ bỏ AI
+
+Tắt và gỡ bỏ các tính năng trí tuệ nhân tạo (AI), trợ lý ảo, đề xuất nội dung và thu thập dữ liệu phân tích tích hợp trên các trình duyệt Google Chrome, Microsoft Edge và Mozilla Firefox:
+* Vô hiệu hóa Gemini và trợ lý viết lách AI trên Google Chrome
+* Vô hiệu hóa Copilot, Bing Chat và gợi ý AI trên Microsoft Edge
+* Tắt đề xuất nội dung và Telemetry trên Mozilla Firefox
+
+### Giá trị Registry bị ảnh hưởng
+* **Google Chrome**: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome`
+  * `CreateThemesSettings` = `2` (REG_DWORD)
+  * `GeminiSettings` = `1` (REG_DWORD)
+  * `GenAILocalFoundationalModelSettings` = `1` (REG_DWORD)
+  * `HelpMeWriteSettings` = `2` (REG_DWORD)
+  * `HistorySearchSettings` = `2` (REG_DWORD)
+  * `TabCompareSettings` = `2` (REG_DWORD)
+  * `DevToolsGenAiSettings` = `2` (REG_DWORD)
+* **Microsoft Edge**: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge`
+  * `AIGenThemesEnabled` = `0` (REG_DWORD)
+  * `BuiltInAIAPIsEnabled` = `0` (REG_DWORD)
+  * `ComposeInlineEnabled` = `0` (REG_DWORD)
+  * `CopilotPageContext` = `0` (REG_DWORD)
+  * `EdgeHistoryAISearchEnabled` = `0` (REG_DWORD)
+  * `Microsoft365CopilotChatIconEnabled` = `0` (REG_DWORD)
+  * `NewTabPageBingChatEnabled` = `0` (REG_DWORD)
+  * `TextPredictionEnabled` = `0` (REG_DWORD)
+  * `VisualSearchEnabled` = `0` (REG_DWORD)
+* **Mozilla Firefox**: `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox`
+  * `DisableFirefoxStudies` = `1` (REG_DWORD)
+  * `DisableTelemetry` = `1` (REG_DWORD)
+  * `SponsoredStories` = `0` (REG_DWORD) (tại `FirefoxHome`)
+  * `SponsoredTopSites` = `0` (REG_DWORD) (tại `FirefoxHome`)
+
+## 3. Khôi phục AI
+
+Khôi phục lại các cài đặt và chính sách trình duyệt về mặc định ban đầu của hệ thống, cho phép các tính năng AI và dịch vụ liên quan hoạt động bình thường:
+* Xóa bỏ các chính sách Group Policy chặn AI đã áp dụng cho Chrome
+* Xóa bỏ các chính sách Group Policy chặn AI đã áp dụng cho Edge
+* Xóa bỏ các chính sách Group Policy chặn AI đã áp dụng cho Firefox
+
+### Giá trị Registry bị ảnh hưởng
+* Xóa các khóa chính sách đã tạo:
+  * `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Google\Chrome`
+  * `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge`
+  * `HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Mozilla\Firefox`

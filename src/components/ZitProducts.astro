@@ -1,0 +1,202 @@
+---
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') 
+  ? import.meta.env.BASE_URL.slice(0, -1) 
+  : import.meta.env.BASE_URL;
+
+const lang = Astro.currentLocale || 'vi';
+
+const i18n = {
+  vi: {
+    sectionTitle: 'Sản phẩm của Team',
+    products: [
+      {
+        num: '01',
+        title: 'Windows Custom',
+        desc: 'Các phiên bản Windows được tối ưu hóa đặc biệt dành riêng cho hiệu suất và sự ổn định tốt nhất.',
+        link: `${baseUrl}/404/`,
+        badge: 'Hệ điều hành',
+        cta: 'Xem chi tiết'
+      },
+      {
+        num: '02',
+        title: 'Phần mềm HyperLis',
+        desc: 'Bộ công cụ tối ưu hóa Windows toàn diện: tăng tốc hiệu năng, dọn dẹp hệ thống, sửa lỗi máy in mạng và quản lý bản quyền.',
+        link: `${baseUrl}/hyperlis/`,
+        badge: 'Phần mềm',
+        cta: 'Xem chi tiết'
+      }
+    ]
+  },
+  en: {
+    sectionTitle: 'Our Products',
+    products: [
+      {
+        num: '01',
+        title: 'Windows Custom',
+        desc: 'Specially optimized Windows versions dedicated to the best performance and stability.',
+        link: `${baseUrl}/en/404/`,
+        badge: 'Operating System',
+        cta: 'View details'
+      },
+      {
+        num: '02',
+        title: 'HyperLis Software',
+        desc: 'A comprehensive Windows optimization toolkit: boosts performance, cleans system, fixes network printer issues, and manages licenses.',
+        link: `${baseUrl}/en/hyperlis/`,
+        badge: 'Software',
+        cta: 'View details'
+      }
+    ]
+  }
+};
+
+const t = i18n[lang] || i18n['vi'];
+---
+
+<section id="products" class="modules-section not-content">
+  <div class="section-header">
+    <h2 class="section-title">{t.sectionTitle}</h2>
+  </div>
+
+  <div class="modules-grid">
+    {t.products.map((mod) => (
+      <a href={mod.link} class="module-card">
+        <div class="module-card-top">
+          <span class="module-num">{mod.num}</span>
+          <span class="module-badge">{mod.badge}</span>
+        </div>
+        <h3 class="module-title">{mod.title}</h3>
+        <p class="module-desc">{mod.desc}</p>
+        <div class="module-arrow">
+          <span>{mod.cta}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .modules-section {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2.25rem 3rem 4rem;
+  }
+
+  @media (max-width: 640px) {
+    .modules-section {
+      padding: 1.75rem 1.25rem 3rem;
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 2.5vw + 1rem, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--sl-color-white);
+    line-height: 1.25;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .modules-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .module-card {
+    background: var(--sl-color-bg-sidebar);
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-decoration: none !important;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .module-card:hover {
+    transform: translateY(-3px);
+    border-color: #10b981;
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1), 0 8px 10px -6px rgba(16, 185, 129, 0.1);
+  }
+
+  .module-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .module-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--sl-color-gray-3);
+  }
+
+  .module-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+    background: rgba(16, 185, 129, 0.12);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+
+  .module-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+    margin: 0 0 0.75rem 0;
+  }
+
+  .module-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--sl-color-gray-3);
+    margin: 0 0 1.5rem 0;
+    flex-grow: 1;
+  }
+
+  .module-arrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #10b981;
+    margin-top: auto;
+    transition: gap 0.2s ease;
+  }
+
+  .module-card:hover .module-arrow {
+    gap: 0.75rem;
+  }
+
+  .module-arrow svg {
+    transition: transform 0.2s ease;
+  }
+
+  .module-card:hover .module-arrow svg {
+    transform: translateX(3px);
+  }
+</style>

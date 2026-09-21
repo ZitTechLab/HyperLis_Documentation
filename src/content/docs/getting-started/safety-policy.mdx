@@ -1,0 +1,44 @@
+---
+title: Lưu ý sử dụng HyperLis
+description: Hướng dẫn cơ chế bảo vệ hệ thống, tạo Restore Point và chính sách an toàn trước khi tinh chỉnh Windows.
+---
+
+import { Steps, Aside } from '@astrojs/starlight/components';
+
+## 1. Tổng quan
+
+Trước khi thực hiện bất kỳ thay đổi nào lên Registry, dịch vụ hệ thống hay gỡ ứng dụng UWP, HyperLis luôn khuyến nghị kích hoạt tạo **System Restore Point (Khôi phục hệ thống)**.
+
+## 2. Điều kiện an toàn trước khi thực hiện
+
+* Ổ đĩa hệ thống `C:` đã bật tính năng **System Protection**.
+* Dung lượng ổ `C:` trống tối thiểu 2 GB.
+* Đăng nhập với tài khoản có quyền Administrator.
+
+## 3. Quy trình tạo Restore Point
+
+<Steps>
+1. **Tìm kiếm tính năng tạo điểm khôi phục**:
+   Mở nút tìm kiếm trên taskbar, tìm kiếm "Create a restore point".
+
+2. **Bật tính năng bảo vệ hệ thống (nếu chưa bật)**:
+   Nhấn vào **Configure**, **Turn on system protection**, **Apply**, **OK**.
+
+3. **Thực thi tạo điểm khôi phục**:
+   Nhấn **Create**, đặt tên điểm khôi phục và chờ một lúc để Windows tạo bản khôi phục.
+
+4. **Kiểm tra trạng thái sẵn sàng**:
+   Khi xuất hiện thông báo "The restore point was created successfully", bạn có thể an tâm áp dụng các tinh chỉnh tiếp theo.
+</Steps>
+
+## 4. Hướng dẫn khôi phục hệ thống
+
+Nếu gặp sự cố, bạn có thể sử dụng tính năng khôi phục hệ thống (System protection) để hoàn tác lại các thay đổi.
+
+<Steps>
+1. Mở nút tìm kiếm trên taskbar, tìm kiếm "Create a restore point".
+
+2. Nhấn vào **System Protection**.
+
+3. Chọn **System Restore** và làm theo hướng dẫn để chọn điểm khôi phục và hoàn tác lại các thay đổi.
+</Steps>

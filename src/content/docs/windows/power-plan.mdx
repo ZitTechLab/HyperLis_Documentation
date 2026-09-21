@@ -1,0 +1,44 @@
+---
+title: Chế độ nguồn
+description: Kích hoạt chế độ nguồn Hiệu năng cao (High Performance) hoặc Hiệu năng tối đa (Ultimate Performance).
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Bật Chế độ Hiệu năng cao
+
+Kích hoạt chế độ Hiệu năng cao để tối đa hóa hiệu suất hệ thống bằng cách hạn chế các cơ chế tiết kiệm điện của CPU và các thành phần khác. Phù hợp cho hầu hết Laptop và PC.
+
+### Giá trị Registry bị ảnh hưởng
+* Lệnh quản lý cấu hình nguồn điện Windows (Power Schemes):
+  * Nhân bản profile Hiệu năng cao: `powercfg.exe -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c`
+  * Kích hoạt profile: `powercfg.exe -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c`
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes`
+  * `ActivePowerScheme` = `"8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c"` (REG_SZ)
+
+## 3. Bật Chế độ Hiệu năng tối đa
+
+Kích hoạt chế độ Hiệu năng tối đa (Ultimate Performance) nhằm loại bỏ độ trễ vi mô và tối ưu hiệu suất ở mức cao nhất cho các máy cấu hình mạnh.
+
+### Lưu ý
+Không khuyến khích sử dụng trên Laptop.
+
+### Giá trị Registry bị ảnh hưởng
+* Lệnh quản lý cấu hình nguồn điện Windows (Power Schemes):
+  * Nhân bản profile Hiệu năng tối đa: `powercfg.exe -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61`
+  * Kích hoạt profile: `powercfg.exe -setactive e9a42b02-d5df-448d-aa00-03f14749eb61`
+* `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power\User\PowerSchemes`
+  * `ActivePowerScheme` = `"e9a42b02-d5df-448d-aa00-03f14749eb61"` (REG_SZ)

@@ -1,0 +1,89 @@
+---
+title: Mở rộng
+description: Tùy biến Snap Assist, menu chuột phải cổ điển, hiện đuôi file, chế độ thu gọn và NumLock khi khởi động.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+## 1. Hình ảnh giao diện
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-01.png" 
+  alt="Giao diện tab Windows - Ảnh 1"
+/>
+
+<Screenshot 
+  src="/images/hyperlis/windows/windows-02.png" 
+  alt="Giao diện tab Windows - Ảnh 2"
+/>
+
+## 2. Tắt Snap Assist
+
+Tắt Snap Assist, hiển thị gợi ý khi bạn ghép cửa sổ:
+* Xóa hộp thumbnail xuất hiện khi kéo cửa sổ vào cạnh màn hình
+* Ít can thiệp hơn cho người dùng thường xuyên ghép cửa sổ
+* Tính năng ghép cửa sổ vẫn hoạt động bình thường
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `EnableSnapAssistFlyout` = `0` (REG_DWORD)
+* `HKEY_CURRENT_USER\Control Panel\Desktop`
+  * `DockMoving` = `"0"` (REG_SZ)
+
+## 3. Bật menu chuột phải cổ điển
+
+Khôi phục menu chuột phải đầy đủ cổ điển trên Windows 11:
+* Xóa menu chuột phải đơn giản hóa trong Windows 11
+* Hiện tất cả tùy chọn mà không cần nhấp 'Show more options'
+* Được ưa thích bởi người dùng nâng cao cần truy cập menu đầy đủ
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32`
+  * `(Default)` = `""` (REG_SZ)
+
+## 4. Hiện đuôi mở rộng của file
+
+Hiển thị phần mở rộng file trong File Explorer:
+* Hiện đuôi file như .exe, .txt, .jpg trên tất cả file
+* Giúp nhận dạng loại file và phát hiện file độc hại (ví dụ: .pdf.exe)
+* Rất được khuyến nghị để nâng cao nhận thức bảo mật
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `HideFileExt` = `0` (REG_DWORD)
+
+## 5. Bật chế độ thu gọn trong Explorer
+
+Bật Chế độ Gọn trong File Explorer Windows 11:
+* Giảm khoảng cách giữa các mục trong File Explorer
+* Hiện nhiều file hơn trên màn hình cùng lúc
+* Tương tự bố cục Explorer Windows 10 cổ điển
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `UseCompactMode` = `1` (REG_DWORD)
+
+## 6. Bật Numlock khi khởi động
+
+Bật NumLock tự động khi Windows khởi động:
+* Đảm bảo bàn phím số luôn hoạt động khi đăng nhập
+* Tiết kiệm thời gian cho người dùng hay dùng bàn phím số
+* Áp dụng qua cài đặt registry
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_USERS\.DEFAULT\Control Panel\Keyboard`
+  * `InitialKeyboardIndicators` = `"2147483650"` (REG_SZ)
+
+## 7. Hiện file và thư mục ẩn
+
+Hiển thị các file và thư mục ẩn trong File Explorer:
+* Tiết lộ file hệ thống và thư mục ẩn như AppData
+* Hữu ích để khắc phục sự cố và quản lý file nâng cao
+
+### Lưu ý
+Hãy cẩn thận không vô tình chỉnh sửa hoặc xóa file hệ thống.
+
+### Giá trị Registry bị ảnh hưởng
+* `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced`
+  * `Hidden` = `1` (REG_DWORD)

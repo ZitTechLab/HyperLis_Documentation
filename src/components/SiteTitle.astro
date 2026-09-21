@@ -1,0 +1,40 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/SiteTitle.astro';
+
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html' || Astro.url.pathname.endsWith('/index.html');
+---
+
+{isHome ? (
+  <a href="/" class="site-title sl-flex">
+    <img src="/images/zit-logo.jpg" alt="Zịt's Tech Lab" class="custom-logo" onerror="if (this.src !== '/images/hyperlis/placeholder.svg') { this.src = '/images/hyperlis/placeholder.svg'; }" />
+    <span class="title-text">
+      Zịt's Tech Lab
+    </span>
+  </a>
+) : (
+  <Default {...Astro.props} />
+)}
+
+<style>
+  .site-title {
+    align-items: center;
+    gap: var(--sl-nav-gap);
+    font-size: var(--sl-text-h4);
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  
+  .title-text {
+    color: var(--sl-color-white);
+  }
+
+  img.custom-logo {
+    height: calc(var(--sl-nav-height) - 2 * var(--sl-nav-pad-y));
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+</style>
