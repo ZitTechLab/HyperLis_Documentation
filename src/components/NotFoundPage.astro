@@ -32,10 +32,24 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     <div class="not-found-visual">
       <div class="visual-glow"></div>
       <img 
-        src={`${baseUrl}/images/hyperlis/404/404.png`} 
+        id="nf-img-zit"
+        src={`${baseUrl}/images/zit-404.png`} 
         alt="404 - Page Not Found" 
         class="not-found-img" 
       />
+      <img 
+        id="nf-img-hyperlis"
+        src={`${baseUrl}/images/hyperlis/404/404.png`} 
+        alt="404 - Page Not Found" 
+        class="not-found-img" 
+        style="display: none;"
+      />
+      <script is:inline>
+        if (window.location.pathname.includes('/hyperlis/')) {
+          document.getElementById('nf-img-zit').style.display = 'none';
+          document.getElementById('nf-img-hyperlis').style.display = 'block';
+        }
+      </script>
     </div>
   </div>
 </div>
@@ -272,6 +286,27 @@ const baseUrl = import.meta.env.BASE_URL.endsWith('/')
     z-index: 2;
     animation: float 4s ease-in-out infinite;
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
+  }
+
+  /* CSS đặc biệt cho ảnh ZitTechLab (loại bỏ nền trắng bằng mix-blend-mode và phóng to) */
+  #nf-img-zit {
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
+    mix-blend-mode: darken;
+    animation: float-zit 4s ease-in-out infinite;
+  }
+
+  @keyframes float-zit {
+    0%, 100% {
+      transform: scale(1.45) translateY(0px);
+    }
+    50% {
+      transform: scale(1.45) translateY(-9px);
+    }
+  }
+
+  :global(:root[data-theme='dark']) #nf-img-zit {
+    mix-blend-mode: screen; /* Trên nền tối, đảo ngược để lọc nền */
+    filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 45px rgba(56, 189, 248, 0.15));
   }
 
   :global(:root[data-theme='dark']) .not-found-img {
