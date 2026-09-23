@@ -1,0 +1,35 @@
+backend:
+  name: github
+  repo: ZitTechLab/HyperLis_Documentation
+  branch: main # Thay đổi thành tên nhánh mặc định của bạn nếu khác
+  commit_messages:
+    create: 'docs: tạo bài viết {{collection}} “{{slug}}”'
+    update: 'docs: cập nhật bài viết {{collection}} “{{slug}}”'
+    delete: 'docs: xóa bài viết {{collection}} “{{slug}}”'
+    uploadMedia: 'docs: tải ảnh lên “{{path}}”'
+    deleteMedia: 'docs: xóa ảnh “{{path}}”'
+
+media_folder: "public/images" # Nơi lưu ảnh tĩnh
+public_folder: "/images" # Đường dẫn URL ảnh khi hiển thị
+
+# Ngôn ngữ giao diện CMS
+locale: "vi"
+
+# Cấu hình collection để quản lý bài viết
+collections:
+  - name: "docs"
+    label: "Tài liệu (Docs)"
+    folder: "src/content/docs"
+    create: true
+    extension: "mdx" # Sveltia và Decap hỗ trợ mdx nếu để format markdown
+    format: "frontmatter"
+    slug: "{{slug}}"
+    # Vì file nằm trong các thư mục con (ví dụ: getting-started/overview.mdx), 
+    # ta bật tính năng nested collections (nếu được hỗ trợ) hoặc dùng nested path.
+    # Decap/Sveltia cho phép quản lý file trong thư mục lồng nhau.
+    nested:
+      depth: 3
+    fields:
+      - { label: "Tiêu đề", name: "title", widget: "string" }
+      - { label: "Mô tả", name: "description", widget: "text", required: false }
+      - { label: "Nội dung", name: "body", widget: "markdown" }
