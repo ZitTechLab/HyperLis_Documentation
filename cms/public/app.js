@@ -188,6 +188,9 @@ monacoContainer.addEventListener('drop', async (e) => {
 
 // Nút Publish lên Web
 document.getElementById('btn-publish').onclick = async () => {
+  // Bắt buộc lưu file trước khi publish
+  await saveFile();
+
   const btn = document.getElementById('btn-publish');
   btn.textContent = 'Đang Publish...';
   btn.disabled = true;
