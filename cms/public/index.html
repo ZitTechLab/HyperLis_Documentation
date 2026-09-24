@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZitTechLab CMS</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Monaco Editor CSS -->
+  <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.min.css">
+</head>
+<body>
+  
+  <header class="header">
+    <div class="logo">HyperLis CMS</div>
+    <div class="toolbar">
+      <button id="btn-save" class="btn primary">Lưu (Ctrl+S)</button>
+      <button id="btn-publish" class="btn success">Publish Lên Web</button>
+    </div>
+  </header>
+
+  <div class="main-container">
+    <!-- Sidebar: File Tree -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h3>Bài viết</h3>
+        <button id="btn-new-file" class="btn-icon" title="Tạo bài mới">+</button>
+      </div>
+      <ul id="file-tree" class="file-tree">
+        <!-- Tree renders here -->
+      </ul>
+    </aside>
+
+    <!-- Editor Pane -->
+    <section class="editor-pane">
+      <div class="editor-toolbar">
+        <button class="btn-snippet" data-snippet="screenshot">🖼️ Ảnh (Screenshot)</button>
+        <button class="btn-snippet" data-snippet="aside">⚠️ Lưu ý (Aside)</button>
+        <button class="btn-snippet" data-snippet="beforeafter">🔄 Before/After</button>
+        <span class="status-msg" id="status-msg"></span>
+      </div>
+      <div id="monaco-container" class="monaco-container"></div>
+    </section>
+
+    <!-- Preview Pane (Iframe to Astro) -->
+    <section class="preview-pane">
+      <div class="preview-header">
+        <span>Live Preview (Astro)</span>
+        <button id="btn-reload-preview" class="btn-icon">🔄</button>
+      </div>
+      <iframe id="preview-iframe" src="http://localhost:4321/" frameborder="0"></iframe>
+    </section>
+  </div>
+
+  <!-- Monaco Editor Loader -->
+  <script>var require = { paths: { 'vs': 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs' } };</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.nls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/editor/editor.main.js"></script>
+  
+  <script src="app.js?v=2"></script>
+</body>
+</html>
