@@ -129,7 +129,7 @@ const docUrl = lang === 'en' ? `${baseUrl}/en/getting-started/overview/` : `${ba
     margin-top: -25px; /* Dịch chuyển sát mép dưới topbar */
     box-sizing: border-box;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    background-color: var(--wu-hero-bg);
+    background-color: transparent !important;
     border-bottom: 1px solid var(--wu-border);
   }
 
@@ -151,8 +151,11 @@ const docUrl = lang === 'en' ? `${baseUrl}/en/getting-started/overview/` : `${ba
   }
 
   /* Dark Theme */
+  :global(:root[data-theme='dark'] .wu-hero-grid), :global(:root[data-theme='dark'] .wu-hero-glow) {
+    display: none !important;
+  }
   :global(:root[data-theme='dark']) {
-    --wu-hero-bg: #090d16;
+    --wu-hero-bg: transparent;
     --wu-title-color: #ffffff;
     --wu-desc-color: #94a3b8;
     --wu-border: rgba(255, 255, 255, 0.08);
