@@ -3,7 +3,10 @@
 
 <starlight-theme-toggle class="theme-toggle-container">
 
+  
+  <div class="global-day-bg" id="globalDayBg"></div>
   <div class="global-night-bg" id="globalNightBg">
+
     <div class="page-stars" id="pageStarsBg"></div>
     <div class="shooting-stars">
       <div class="shooting" style="top:14%;left:70%;animation-duration:5.5s;animation-delay:.2s;"></div>
@@ -52,6 +55,19 @@
 </starlight-theme-toggle>
 
 <style>
+
+
+.global-day-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: #ffffff; /* Light mode white, dark mode dark */
+  transition: background-color 1.2s ease;
+}
+:global(html), :global(body), :global(.page), :global(main), :global(.main-pane), :global(.sl-container) {
+  background: transparent !important;
+  background-color: transparent !important;
+}
 
 .global-night-bg {
   position: fixed;
@@ -906,29 +922,13 @@
 }
 
 
-:global(:root[data-theme='dark'] body),
-:global(:root[data-theme='dark'] html),
-:global(:root[data-theme='dark'] .page),
-:global(:root[data-theme='dark'] main),
-:global(:root[data-theme='dark'] .main-pane),
-:global(:root[data-theme='dark'] .sl-container) {
-  background: transparent !important;
-  background-color: transparent !important;
-}
+
 
 </style>
 <style is:global>
 
 
-:global(:root[data-theme='dark'] body),
-:global(:root[data-theme='dark'] html),
-:global(:root[data-theme='dark'] .page),
-:global(:root[data-theme='dark'] main),
-:global(:root[data-theme='dark'] .main-pane),
-:global(:root[data-theme='dark'] .sl-container) {
-  background: transparent !important;
-  background-color: transparent !important;
-}
+
 
 </style>
 
@@ -998,10 +998,16 @@
       randomDots(document.querySelector('#pageStarsBg'), 50);
 
       // Move to body if not already
+      
+      const dayBg = this.querySelector('#globalDayBg');
+      if (dayBg && dayBg.parentElement !== document.body) {
+        document.body.insertBefore(dayBg, document.body.firstChild);
+      }
       const bg = this.querySelector('#globalNightBg');
       if (bg && bg.parentElement !== document.body) {
         document.body.insertBefore(bg, document.body.firstChild);
       }
+
 
 
 
@@ -1032,16 +1038,11 @@
   50% { opacity: .9; }
 }
 
-:global(:root[data-theme='dark'] body),
-:global(:root[data-theme='dark'] html),
-:global(:root[data-theme='dark'] .page),
-:global(:root[data-theme='dark'] main),
-:global(:root[data-theme='dark'] .main-pane),
-:global(:root[data-theme='dark'] .sl-container) {
-  background: transparent !important;
-  background-color: transparent !important;
-}
+
 
 </style>
+
+
+
 
 
