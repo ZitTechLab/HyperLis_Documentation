@@ -170,8 +170,11 @@ monacoContainer.addEventListener('drop', async (e) => {
     const data = await res.json();
     
     if (data.success) {
-      // Chèn mã Screenshot vào chỗ con trỏ
-      const position = editor.getPosition();
+      // Xác định vị trí chuột lúc thả file
+      const target = editor.getTargetAtClientPoint(e.clientX, e.clientY);
+      const position = target && target.position ? target.position : editor.getPosition();
+      
+      // Chèn mã Screenshot vào đúng vị trí chuột thả
       const text = `\n<Screenshot \n  src="${data.url}" \n  alt="${file.name}" \n  caption="Ghi chú ảnh" \n  title="Tiêu đề ảnh"\n/>\n`;
       
       editor.executeEdits("upload", [{
@@ -179,6 +182,9 @@ monacoContainer.addEventListener('drop', async (e) => {
         text: text,
         forceMoveMarkers: true
       }]);
+      // Di chuyển con trỏ xuống vị trí mới
+      editor.setPosition(position);
+      editor.focus();
       showStatus('Upload thành công!');
     }
   } catch (err) {
